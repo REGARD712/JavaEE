@@ -1,4 +1,4 @@
-public class Demo9_startFunc {
+public class Demo09_startFunc {
     public static void main(String[] args) {
         Thread t = new Thread(() -> {
             System.out.println("thread");

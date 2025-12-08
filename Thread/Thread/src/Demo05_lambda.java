@@ -1,4 +1,4 @@
-public class Demo5_lambda {
+public class Demo05_lambda {
     public static void main(String[] args) throws InterruptedException {
         // 使用lambda表达式
         Thread t = new Thread(() -> {

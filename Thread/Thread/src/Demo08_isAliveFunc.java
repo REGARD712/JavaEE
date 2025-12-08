@@ -1,4 +1,4 @@
-public class Demo8_isAliveFunc {
+public class Demo08_isAliveFunc {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(() -> {
             for (int i = 0; i < 3; i++) {

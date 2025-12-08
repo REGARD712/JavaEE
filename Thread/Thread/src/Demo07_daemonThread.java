@@ -1,4 +1,4 @@
-public class Demo7_daemonThread {
+public class Demo07_daemonThread {
     public static void main(String[] args) throws InterruptedException {
         Thread t = new Thread(() -> {
             while (true) {

@@ -1,4 +1,4 @@
-public class Demo3_anoInnerClass {
+public class Demo03_anoInnerClass {
     public static void main(String[] args) throws InterruptedException {
         // 创建对象的时候使用了Thread的匿名（一次性）子类，并重写run方法
         Thread t = new Thread() {

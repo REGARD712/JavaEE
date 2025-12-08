@@ -1,9 +1,9 @@
-// 实现runnable接口，解耦合
-class MyRunnable implements Runnable {
+// 继承Thread类的子类，并重写run方法
+class MyThread extends Thread {
     @Override
     public void run() {
         while (true) {
-            System.out.println("This is Thread");
+            System.out.println("This is MyThread");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -13,15 +13,14 @@ class MyRunnable implements Runnable {
     }
 }
 
-public class Demo2_runnable {
+public class Demo01_subclass {
     public static void main(String[] args) throws InterruptedException {
-        Runnable runnable = new MyRunnable();
-        Thread t = new Thread(runnable);
+        Thread t = new MyThread();
         t.start();      // 创建线程
-
+        
         // 主线程
         while (true) {
-            System.out.printf("This is main");
+            System.out.println("This is main");
             Thread.sleep(1000);
         }
     }

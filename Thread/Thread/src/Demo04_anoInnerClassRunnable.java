@@ -1,4 +1,4 @@
-public class Demo4_anoInnerClassRunnable {
+public class Demo04_anoInnerClassRunnable {
     public static void main(String[] args) throws InterruptedException {
         // 在Runnable这里创建匿名内部类，将任务和线程执行分离
         Runnable runnable = new Runnable() {

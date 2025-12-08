@@ -1,4 +1,4 @@
-public class Demo6_foregroundThread {
+public class Demo06_foregroundThread {
     public static void main(String[] args) throws InterruptedException {
         Thread t1 = new Thread(() -> {
             while (true) {
