@@ -142,12 +142,11 @@ public class Demo16_deadLock {
                 // t1 线程获取到锁对象 locker1
                 try {
                     Thread.sleep(1000);
-                    // 此时 t2 因 locker1 被 t1 获取而处于阻塞状态 BLOCKED
-                    // t1 休眠结束后，获取 locker2
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
+            // t1 线程释放已占有的锁对象 locker1
             // 尝试获取锁对象 locker2
             synchronized (locker2) {
                 System.out.println("t1 线程获取到两把锁");
@@ -156,19 +155,17 @@ public class Demo16_deadLock {
         });
 
         Thread t2 = new Thread(() -> {
-            synchronized (locker1) {
-                // t2 线程获取到锁对象 locker1
-                // 因 t1 先获取到 locker1 ，t2 此时处于阻塞状态 BLOCKED
-                // 当 t1 结束执行后，t2 恢复执行并获取 locker1
+            synchronized (locker2) {
+                // t2 线程获取到锁对象 locker2
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    // 休眠结束后继续获取 locker2
                     throw new RuntimeException(e);
                 }
             }
-            // 尝试获取锁对象 locker2
-            synchronized (locker2) {
+            // t2 线程释放已占有的锁对象 locker2
+            // 尝试获取锁对象 locker1
+            synchronized (locker1) {
                 System.out.println("t2 线程获取到两把锁");
                 // t2 获取到两把锁后结束执行
             }
