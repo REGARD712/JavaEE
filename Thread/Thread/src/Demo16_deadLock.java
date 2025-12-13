@@ -83,7 +83,7 @@ public class Demo16_deadLock {
         t2.join();
         // 要想不构成死锁，可以将获取锁的顺序调换一下，即 t1 和 t2 都以 locker1 和 locker2 的顺序加锁
     }
-    // 防止死锁的写法
+    // 防止死锁的写法：打破循环等待条件——调整加锁顺序
     public static void main3(String[] args) throws InterruptedException {
         Object locker1 = new Object();
         Object locker2 = new Object();
@@ -122,6 +122,55 @@ public class Demo16_deadLock {
                     System.out.println("t2 线程获取到两把锁");
                     // t2 获取到两把锁后结束执行
                 }
+            }
+        });
+
+        t1.start();
+        t2.start();
+
+        t1.join();
+        t2.join();
+    }
+
+    // 避免死锁的写法：打破持有并等待条件——将嵌套加锁改成串行加锁
+    public static void main(String[] args) throws InterruptedException {
+        Object locker1 = new Object();
+        Object locker2 = new Object();
+
+        Thread t1 = new Thread(() -> {
+            synchronized (locker1) {
+                // t1 线程获取到锁对象 locker1
+                try {
+                    Thread.sleep(1000);
+                    // 此时 t2 因 locker1 被 t1 获取而处于阻塞状态 BLOCKED
+                    // t1 休眠结束后，获取 locker2
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            // 尝试获取锁对象 locker2
+            synchronized (locker2) {
+                System.out.println("t1 线程获取到两把锁");
+                // t1 获取到两把锁之后结束执行，此时 locker1 和 locker2 均被释放
+            }
+        });
+
+        Thread t2 = new Thread(() -> {
+            synchronized (locker1) {
+                // t2 线程获取到锁对象 locker1
+                // 因 t1 先获取到 locker1 ，t2 此时处于阻塞状态 BLOCKED
+                // 当 t1 结束执行后，t2 恢复执行并获取 locker1
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // 休眠结束后继续获取 locker2
+                    throw new RuntimeException(e);
+                }
+            }
+            // 尝试获取锁对象 locker2
+            synchronized (locker2) {
+                System.out.println("t2 线程获取到两把锁");
+                // t2 获取到两把锁后结束执行
             }
         });
 
