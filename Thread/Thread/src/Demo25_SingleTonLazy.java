@@ -1,11 +1,16 @@
 // 通过懒汉模式构造单例模式
 class SingletonLazy {
-    private static SingletonLazy instance = null;
+    private static volatile SingletonLazy instance = null;
+    private static Object locker = new Object();
 
     // get方法
     public static SingletonLazy getInstance() {
         if (instance == null) {
-            instance = new SingletonLazy();
+            synchronized (locker) {
+                if (instance == null) {
+                    instance = new SingletonLazy();
+                }
+            }
         }
         return instance;
     }
