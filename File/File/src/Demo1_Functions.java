@@ -79,4 +79,16 @@ public class Demo1_Functions {
         boolean result = file.renameTo(newFile);
         System.out.println(result);
     }
+
+    public static void main10(String[] args) {
+        File file = new File("./test.txt");
+        boolean result = file.canRead();
+        System.out.println(result);
+    }
+
+    public static void main11(String[] args) {
+        File file = new File("./test.txt");
+        boolean result = file.canWrite();
+        System.out.println(result);
+    }
 }
