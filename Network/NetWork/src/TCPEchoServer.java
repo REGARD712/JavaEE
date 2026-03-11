@@ -5,9 +5,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TCPEchoServer {
-    // 服务器专业socket
+    // 服务器专用socket
     private ServerSocket serverSocket = null;
     // 构造方法
     public TCPEchoServer(int port) throws IOException {
@@ -15,15 +17,44 @@ public class TCPEchoServer {
     }
     public void start() throws IOException {
         System.out.println("服务器启动");
+
+        // 这里不适用固定线程的线程池，因为客户端的数目是不固定的
+        ExecutorService executorService = Executors.newCachedThreadPool();
+
         while (true) {
-            // 先建立与客户端的链接，若客户端没有发来链接就会阻塞
+//            // 先建立与客户端的链接，若客户端没有发来链接就会阻塞
+//            Socket clientSocket = serverSocket.accept();
+//            // 然后处理请求并返回响应
+//            processConnection(clientSocket);
+            // 但是该服务器无法同时给多个客户端提供服务
+
+//            // 多线程解决主线程每次只能accept一个客户端的问题
+//            Socket clientSocket = serverSocket.accept();
+//            // 主线程每accept一个客户端，就创建一个线程，让该线程去负责处理当前客户端的请求
+//            Thread t = new Thread(() -> {
+//                try {
+//                    processConnection(clientSocket);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            });
+//            t.start();
+            // 当客户端数目过大时，资源消耗大
+
+            // 线程池解决资源消耗大的问题
             Socket clientSocket = serverSocket.accept();
-            // 然后处理请求并返回响应
-            processConnection(clientSocket);
+            // 将任务通过submit方法上传至线程池
+            executorService.submit(() -> {
+                try {
+                    processConnection(clientSocket);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            });
         }
     }
 
-    private void processConnection(Socket clientSocket) {
+    private void processConnection(Socket clientSocket) throws IOException {
         System.out.printf("[%s:%d] 客户端上线\n", clientSocket.getInetAddress(), clientSocket.getPort());
         // 使用字节流读取数据
         try (InputStream inputStream = clientSocket.getInputStream();
@@ -46,13 +77,19 @@ public class TCPEchoServer {
                 // 3. 返回响应给客户端（可以直接使用outputStream的write方法写入字节也可以借助PrintWriter直接写入字符）
                 //outputStream.write(response.getBytes());
                 writer.println(response);
-                writer.flush();
+                writer.flush();  // 刷新缓冲区确保写入网卡
                 // 4. 打印日志
                 System.out.printf("[%s:%d] req: %s, resp: %s\n", clientSocket.getInetAddress(), clientSocket.getPort(),
                         request, response);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } finally {
+           try {
+               clientSocket.close();
+           } catch (IOException e) {
+               throw new RuntimeException(e);
+           }
         }
     }
 

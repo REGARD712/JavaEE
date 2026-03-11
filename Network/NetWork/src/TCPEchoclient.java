@@ -26,7 +26,7 @@ public class TCPEchoclient {
                 String request = scanner.next();
                 // 2. 发送给服务器
                 writer.println(request);
-                writer.flush();
+                writer.flush();  // 刷新缓冲区确保写入网卡
                 // 3. 接收服务器的响应
                 String response = scannerNet.next();
                 // 4. 打印响应
