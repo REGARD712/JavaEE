@@ -45,7 +45,7 @@ public class UdpEchoServer {
         }
     }
     // 后续若写别的服务器，只修改这里即可
-    private String process(String request) {
+    public String process(String request) {
         return request;
     }
 
