@@ -9,13 +9,23 @@
 <body>
     <!-- <button>点击</button> -->
 
-    <div id="content"> 
+    <!-- <div id="content"> 
         <span id="elem">我是一个span</span>
-    </div>
+    </div> -->
 
-    <input type="text" value="input" id="name">
+    <!-- <input type="text" value="input" id="name"> -->
 
-    <a href="https://www.baidu.com" id="link">跳转</a>
+    <!-- <a href="https://www.baidu.com" id="link">跳转</sa> -->
+
+    <!-- 操作CSS样式 -->
+    <!-- <div style="font-size: 40px;" id="div1">我是一个div</div>-->
+
+    <ol>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+    </ol>
 
     <script>
         // $(document).ready(function() {
@@ -42,12 +52,19 @@
         //     $("#name").val("input222222222");
         // })
 
-        $("a").click(function() {
-            // 获取链接地址
-            // console.log($(this).attr("href"));
-            // 修改链接地址
-            $(this).attr("href", "https://www.youdao.com"); 
-        });
+        // $("a").click(function() {
+        //     // 获取链接地址
+        //     // console.log($(this).attr("href"));
+        //     // 修改链接地址
+        //     $(this).attr("href", "https://www.youdao.com"); 
+        // });
+
+        // console.log($("div").css("font-size"));
+
+        $("ol").append("append");
+        $("ol").prepend("prepend");
+        $("ol").before("before");
+        $("ol").after("after");
     </script>
 </body>
 </html>
