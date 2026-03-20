@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQueryDemo</title>
+    <script src="JS/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <!-- <button>点击</button> -->
+
+    <div id="content"> 
+        <span id="elem">我是一个span</span>
+    </div>
+
+    <input type="text" value="input" id="name">
+
+    <a href="https://www.baidu.com" id="link">跳转</a>
+
+    <script>
+        // $(document).ready(function() {
+        //     alert("hello world");
+        // })
+
+        // $("button").click(function() {
+        //     alert("按钮被点击了");
+        // })
+
+        // 获取页面元素内容
+        // $("#content").click(function() {
+        //     console.log($(this).text());
+        // })
+
+        // 修改页面元素内容
+        // $("#content").click(function() {
+        //     // $(this).text("<h1>我是点击后的span</h1>");  // 点击后不会解析内容中的标签
+        //     $(this).html("<h1>我是点击后的span</h1>");  // 点击后会解析内容中的标签
+        // })
+
+        // $("#content").click(function() {
+        //     // console.log($("#name").val());
+        //     $("#name").val("input222222222");
+        // })
+
+        $("a").click(function() {
+            // 获取链接地址
+            // console.log($(this).attr("href"));
+            // 修改链接地址
+            $(this).attr("href", "https://www.youdao.com"); 
+        });
+    </script>
+</body>
+</html>
