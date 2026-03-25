@@ -1,9 +1,10 @@
 package com.spring.example;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,5 +52,25 @@ public class RequestController {
     @RequestMapping("/r8")
     public String r8(@RequestParam List<Integer> list) {
         return "接收参数, list: " + list;
+    }
+
+    // 传递 json
+    @RequestMapping("/r9")
+    public String r9(@RequestBody UserInfo userInfo) {
+        return userInfo.toString();
+    }
+
+    // 从 URL 中获取参数
+    @RequestMapping("/test/{type}/{id}")
+    public String r10(@PathVariable("id") Integer testId, @PathVariable("type") String testType) {
+        return "获取参数：" + testId + testType;
+    }
+
+    // 上传文件
+    @RequestMapping("r11")
+    public String r11(@RequestPart("file") MultipartFile file) throws IOException {
+//        return "获取文件名称：" + file.getOriginalFilename();
+        file.transferTo(new File("C:\\JAVA\\JavaEE\\" + file.getOriginalFilename()));
+        return "文件上传成功";
     }
 }
