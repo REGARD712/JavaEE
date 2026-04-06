@@ -3,6 +3,7 @@ package com.spring.example;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -92,5 +93,51 @@ public class RequestController {
     @RequestMapping("/r13")
     public String r13(@CookieValue("java") String java) {
         return "获取 Cookie 的值：" + java;
+    }
+
+    @RequestMapping("/setSession")
+    public String setSession(HttpServletRequest request) {
+        // 从 cookie 中获取 sessionId，然后根据这个 sessionId 获取到 session对象
+        // 若 sessionId 不存在，就创建一个新的 session
+        HttpSession session = request.getSession();
+        // 登陆的用户信息
+        session.setAttribute("userName", "zhangsan");
+        session.setAttribute("userId", "123456");
+        return "设置 session 成功";
+    }
+
+    @RequestMapping("/getSession")
+    public String getSession(HttpServletRequest request) {
+        // 通过HttpServletRequest类的getSession方法获取到请求中的Session，并存储到HttpSession对象中
+        HttpSession session = request.getSession(false);  // 设置参数为 false 时，session 对象可能为空
+        // 如果 session 对象不为空，说明用户登陆成功；否则未登录
+        if (session == null) {
+            return "用户未登录";
+        } else {
+            // 从 session 中获取用户登录的信息
+            String userName = (String)session.getAttribute("userName");
+            return "登录用户：" + userName;
+        }
+    }
+    @RequestMapping("/getSession2")
+    public String getSession2(HttpServletRequest request) {
+        // 通过HttpServletRequest类的getSession方法获取到请求中的Session，并存储到HttpSession对象中
+        HttpSession session = request.getSession();  // 设置参数为 true/无设置 时，session 对象不会为空
+        // 如果没有获取到 session 对象时会返回一个空的 Session 对象
+        String userName = (String)session.getAttribute("userName");
+        return "登录用户：" + userName;
+    }
+
+    @RequestMapping("/getSession3")
+    public String getSession3(HttpSession session) {
+        // 直接从 session 中获取登录的用户信息
+        String userName = (String)session.getAttribute("userName");
+        return "登录用户：" + userName;
+    }
+
+    @RequestMapping("/getSession4")
+    public String getSession4(@SessionAttribute("userName") String userName) {
+        // 直接返回登录的用户信息
+        return "登录用户：" + userName;
     }
 }
