@@ -5,6 +5,12 @@ public class UserInfo {
     private Integer gender;
     private Integer age;
 
+    public UserInfo (String username, Integer gender, Integer age) {
+        this.username = username;
+        this.gender = gender;
+        this.age = age;
+    }
+
     public String getUsername() {
         return username;
     }
