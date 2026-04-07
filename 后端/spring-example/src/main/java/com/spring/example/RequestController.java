@@ -140,4 +140,18 @@ public class RequestController {
         // 直接返回登录的用户信息
         return "登录用户：" + userName;
     }
+
+    // 获取header
+    @RequestMapping("/getHeader")
+    public String getHeader(HttpServletRequest request) {
+        // 获取header中的user-agent
+        String userAgent = request.getHeader("User-Agent");
+        return "从header中获取到userAgent：" + userAgent;
+    }
+
+    @RequestMapping("/getHeader2")
+    public String getHeader2(@RequestHeader("User-Agent") String userAgent) {
+        // 获取header中的user-agent
+        return "从header中获取到userAgent：" + userAgent;
+    }
 }
