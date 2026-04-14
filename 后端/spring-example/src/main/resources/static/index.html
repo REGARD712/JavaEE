@@ -12,9 +12,15 @@
 <body>
     登录人: <span id="loginUser"></span>
 
-    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="JS/jquery-3.7.1.min.js"></script>
     <script>
-
+        $.ajax({
+           url: "/user/getLoginUser",
+           type: "get",
+           success: function (userName) {
+               $("#loginUser").text(userName);
+           }
+        });
     </script>
 </body>
 
