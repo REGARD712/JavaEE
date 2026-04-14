@@ -1,37 +1,38 @@
 package com.spring.example;
 
-import org.springframework.web.bind.annotation.*;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/user")
 @RestController
 public class UserController {
-    // 既支持 GET 也支持 POST 请求
-    @RequestMapping("/m1")
-    public String Hello() {
-        return "Hello m1";
-    }
-    @RequestMapping(value = "/m2", method = {RequestMethod.GET, RequestMethod.POST})
-    public String Hello2() {
-        return "Hello m2";
+    @RequestMapping("/login")
+    public Boolean login(String userName, String password, HttpSession session) {
+        // 对数据进行校验
+//        if (userName == null || userName == "" || password == null || password == "") {
+//            return false;
+//        }
+        if (!StringUtils.hasLength(userName) || !StringUtils.hasLength(password)) {
+            return false;
+        }
+
+//        if (userName == "admin" && password == "admin") {
+//            session.setAttribute("userName", userName);
+//            return true;
+//        }
+        if ("admin".equals(userName) && "admin".equals(password)) {
+            session.setAttribute("userName", userName);
+            return true;
+        }
+
+        return false;
     }
 
-    // 只支持 GET 请求
-    @RequestMapping(value = "/m3", method = RequestMethod.GET)
-    public String Hello3() {
-        return "Hello m3";
-    }
-    @GetMapping("/m4")
-    public String Hello4() {
-        return "Hello m4";
-    }
-
-    // 只支持 POST 请求
-    @RequestMapping(value = "/m5", method = RequestMethod.POST)
-    public String Hello5() {
-        return "Hello m5";
-    }
-    @PostMapping("/m6")
-    public String Hello6() {
-        return "Hello m6";
+    @RequestMapping("/getLoginUser")
+    public String getLoginUser(HttpSession session) {
+        String userName = (String)session.getAttribute("userName");
+        return "登录的用户：" + userName;
     }
 }
