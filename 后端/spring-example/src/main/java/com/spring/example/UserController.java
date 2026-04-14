@@ -33,6 +33,6 @@ public class UserController {
     @RequestMapping("/getLoginUser")
     public String getLoginUser(HttpSession session) {
         String userName = (String)session.getAttribute("userName");
-        return "登录的用户：" + userName;
+        return userName;
     }
 }
