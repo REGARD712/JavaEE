@@ -1,4 +1,4 @@
-package org.example.demo_spring_book;
+package org.example.demo_spring_book.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;

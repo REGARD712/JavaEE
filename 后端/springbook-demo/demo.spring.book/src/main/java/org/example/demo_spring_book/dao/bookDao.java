@@ -1,23 +1,14 @@
-package org.example.demo_spring_book;
+package org.example.demo_spring_book.dao;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.example.demo_spring_book.model.BookInfo;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@RequestMapping("/book")
-@RestController
-public class BookController {
-    @RequestMapping("/getList")
-    public List<BookInfo> getList () {
-        List<BookInfo> books = mockData(); // 自行生成数据
-        return books;
-    }
-
-    private List<BookInfo> mockData() {
+public class bookDao {
+    public List<BookInfo> mockData() {
         List<BookInfo> books = new ArrayList<>();
 
         // 生成十五本书及其相关信息
