@@ -33,7 +33,24 @@
     <script src="js/jquery.min.js"></script>
     <script>
         function login() {
-            location.href = "book_list.html";
+            // 当点击登录按钮后通过ajax请求将数据传给后端
+            $.ajax({
+                type: "post",
+                url: "/user/login",
+                data: {
+                    // 通过id取得对应字段的值
+                    name: $("#userName").val(),
+                    password: $("#password").val()
+                },
+                success: function(result) {
+                    // 若后端返回值是true
+                    if (result) {
+                        location.href = "book_list.html";
+                    } else {
+                        alert("账号或密码错误！");
+                    }
+                }
+            });
         }
     </script>
 </body>

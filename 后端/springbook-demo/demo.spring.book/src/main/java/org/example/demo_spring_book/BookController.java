@@ -30,7 +30,7 @@ public class BookController {
             bookInfo.setPrice(new BigDecimal(new Random().nextInt(500)));
             bookInfo.setPublish("出版社" + i);
             bookInfo.setStatus(i % 5 == 0 ? 2 : 1);
-            bookInfo.setStatusCN("图书状态%s".formatted((bookInfo.getStatus() == 1) ? "可借阅" : "已借出"));
+            bookInfo.setStatusCN("%s".formatted((bookInfo.getStatus() == 1) ? "可借阅" : "已借出"));
             books.add(bookInfo);
         }
 
