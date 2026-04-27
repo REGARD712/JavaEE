@@ -1,4 +1,4 @@
-package org.me.springiocdidemo;
+package org.me.springiocdidemo.example;
 
 public class Tire {
     Integer size;
