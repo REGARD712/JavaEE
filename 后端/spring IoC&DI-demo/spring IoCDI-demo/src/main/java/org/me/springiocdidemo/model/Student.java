@@ -1,4 +1,4 @@
-package org.me.springiocdidemo;
+package org.me.springiocdidemo.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
