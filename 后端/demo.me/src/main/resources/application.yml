@@ -1,0 +1,19 @@
+#设置端口号
+server:
+  port: 9090
+#自定义key
+my:
+  key3: 20
+  key4: 5
+#自定义对象
+person:
+  id: 1
+  name: Java
+  age: 18
+#自定义对象列表
+dbtypes:
+  id: 5
+  name:
+    - mysql
+    - sqlserver
+    - db2
