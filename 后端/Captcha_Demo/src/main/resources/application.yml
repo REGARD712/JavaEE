@@ -1,7 +1,7 @@
 spring:
   application:
     name: spring-captcha-demo
-#指定验证码的配置
+#存储验证码相关配置
 captcha:
     #验证码的长度
     width: 150
