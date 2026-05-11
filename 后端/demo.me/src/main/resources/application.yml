@@ -5,6 +5,34 @@ server:
 my:
   key3: 20
   key4: 5
+#aa.bb.cc: 100
+#aa:
+#  bb:
+#    cc: 100
+#    dd: 200
+##字符串
+#string.value: Hello World
+#string:
+#  value: Hello World
+##布尔值
+#boolean.value: true
+#boolean:
+#  value: true
+##整数
+#int.value: 100
+#int:
+#  value: 100
+##浮点数
+#float.value: 3.14
+#float:
+#  value: 3.14
+##空值:~表示空值
+#null.value: ~
+##这种写法会报错，因为null是Java中的关键字，不能作为属性名
+#null:
+#  value: ~
+##空字符串:什么都不写，或者写个空单/双引号
+#empty.value: ""
 #自定义对象
 person:
   id: 1
