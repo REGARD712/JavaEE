@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.me.captcha_demo.model.CaptchaYml;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +42,21 @@ public class CaptchaController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @RequestMapping("/checkCaptcha")
+    public boolean checkCaptcha(String captcha, HttpSession session) {
+        // 验证前端用户输入的验证码
+        if (!StringUtils.hasLength(captcha)) {
+            return false;
+        }
+        String code = (String)session.getAttribute(captchaYml.getSession().getKey());
+        Date date = (Date)session.getAttribute(captchaYml.getSession().getDate());
+        // 若验证码没错且时间未过期，则返回true
+        if (code.equalsIgnoreCase(captcha) && date != null
+            && System.currentTimeMillis() - date.getTime() < VALUE_TIME) {
+            return true;
+        }
+        return false;
     }
 }
