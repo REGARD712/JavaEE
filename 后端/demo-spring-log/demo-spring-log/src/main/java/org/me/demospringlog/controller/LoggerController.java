@@ -16,6 +16,11 @@ public class LoggerController {
 //        System.out.println("打印日志");
 
         // 通过日志对象打印日志
-        logger.info("----------------打印日志----------------");
+//        logger.info("----------------打印日志----------------");
+        logger.trace("==========trace==========");
+        logger.debug("==========debug==========");
+        logger.info("==========info==========");
+        logger.warn("==========warn==========");
+        logger.error("==========error==========");
     }
 }
