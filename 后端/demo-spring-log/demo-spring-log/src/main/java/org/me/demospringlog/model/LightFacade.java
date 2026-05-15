@@ -9,14 +9,12 @@ public class LightFacade {
     private HallWayLight hallWayLight = new HallWayLight();
     private DiningRoomLight diningRoomLight = new DiningRoomLight();
 
-    @PostConstruct
     public void turnOnAllLights() {
         livingRoomLight.on();
         hallWayLight.on();
         diningRoomLight.on();
     }
 
-    @PostConstruct
     public void turnOffAllLights() {
         livingRoomLight.off();
         hallWayLight.off();
