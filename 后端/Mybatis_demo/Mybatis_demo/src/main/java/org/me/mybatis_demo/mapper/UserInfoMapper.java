@@ -18,17 +18,14 @@ public interface UserInfoMapper {
     public UserInfo selectById(Integer id);
 
 
-    @Select("SELECT id, username, `password`, age, gender, phone " +
-            "FROM user_info WHERE username = #{userName}")
+    @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{userName}")
     public UserInfo selectByName(String userName);
 
     // 传递多个参数
-    @Select("SELECT id, username, `password`, age, gender, phone " +
-            "FROM user_info WHERE username = #{userName} AND `password` = #{passWord}")
+    @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{userName} AND `password` = #{passWord}")
     public UserInfo selectByNameAndPwd(String userName, String passWord);
 
-    @Select("SELECT id, username, `password`, age, gender, phone " +
-            "FROM user_info WHERE username = #{username} AND `password` = #{password}")
+    @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{username} AND `password` = #{password}")
     public UserInfo selectByNameAndPwd2(@Param("username") String userName, @Param("password") String passWord);
 
     @Select("SELECT id, username, `password`, age, gender, phone, delete_flag AS deleteFlag, create_time AS createTime, update_time AS updateTime FROM user_info WHERE username = #{userName} AND `password` = #{passWord}")
