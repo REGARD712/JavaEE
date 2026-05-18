@@ -63,4 +63,10 @@ class UserInfoMapperTest {
         UserInfo userInfo = userInfoMapper.selectByInfo("zhangsan", "123456");
         System.out.println(userInfo);
     }
+
+    @Test
+    void selectById2() {
+        UserInfo userInfo = userInfoMapper.selectById2(1);
+        System.out.println(userInfo);
+    }
 }

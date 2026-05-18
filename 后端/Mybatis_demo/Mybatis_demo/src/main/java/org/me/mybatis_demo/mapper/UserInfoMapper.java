@@ -17,6 +17,8 @@ public interface UserInfoMapper {
     @Select("SELECT * FROM user_info WHERE id = #{id}")
     public UserInfo selectById(Integer id);
 
+    @Select("SELECT * FROM user_info WHERE id = #{aa}")
+    public UserInfo selectById2(@Param("aa") Integer id);
 
     @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{userName}")
     public UserInfo selectByName(String userName);
