@@ -121,4 +121,10 @@ class UserInfoMapperTest {
     void updateUser() {
         System.out.println("影响的行数：" + userInfoMapper.updateUser(6));
     }
+
+    @Test
+    void seleteUser() {
+        List<UserInfo> userInfoList = userInfoMapper.seleteUser(3);
+        System.out.println(userInfoList);
+    }
 }

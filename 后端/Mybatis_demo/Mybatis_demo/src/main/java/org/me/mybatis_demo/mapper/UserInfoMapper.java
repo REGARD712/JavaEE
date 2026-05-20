@@ -60,4 +60,12 @@ public interface UserInfoMapper {
 
     @Update("update user_info set phone = '10239429810' where id = #{id}")
     Integer updateUser(Integer id);
+
+    @Results(id = "resultMap", value = {
+            @Result(column = "delete_flag", property = "deleteFlag"),
+            @Result(column = "create_time", property = "createTime"),
+            @Result(column = "update_time", property = "updateTime")
+    })
+    @Select("SELECT * FROM user_info WHERE id = #{id}")
+    List<UserInfo> seleteUser(Integer id);
 }
