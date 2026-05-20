@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.me.mybatis_demo.mapper.UserInfoMapperXML">
+    <!--  增  -->
+    <insert id="insertUser">
+        INSERT INTO user_info (username, `password`, age, gender, phone)
+        VALUES (#{username}, #{password}, #{age}, #{gender}, #{phone})
+    </insert>
+
+    <insert id="insertUser2">
+        INSERT INTO user_info (username, `password`, age, gender, phone)
+        VALUES (#{userinfo.username}, #{userinfo.password}, #{userinfo.age}, #{userinfo.gender}, #{userinfo.phone})
+    </insert>
+
+    <insert id="insertUser3" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_info (username, `password`, age, gender, phone)
+        VALUES (#{username}, #{password}, #{age}, #{gender}, #{phone})
+    </insert>
+
+    <!--  删  -->
+    <delete id="deleteUser">
+        DELETE FROM user_info WHERE id = #{id}
+    </delete>
+
+    <!--  改  -->
+    <update id="updateUser">
+        UPDATE user_info SET delete_flag = #{deleteFlag} WHERE id = #{id}
+    </update>
+
+    <!--  查  -->
+    <select id="selectUser" resultType="org.me.mybatis_demo.model.UserInfo">
+        SELECT * FROM user_info
+    </select>
+
+    <select id="selectUserById" resultType="org.me.mybatis_demo.model.UserInfo">
+        SELECT id, username, `password`, age, gender, phone,
+        delete_flag, create_time, update_time
+        FROM user_info WHERE id = #{id}
+    </select>
+
+    <select id="selectUserById2" resultType="org.me.mybatis_demo.model.UserInfo">
+        SELECT id, username, `password`, age, gender, phone,
+        delete_flag, create_time, update_time
+        FROM user_info WHERE id = #{id}
+    </select>
+
+    <resultMap id="BaseMap" type="org.me.mybatis_demo.model.UserInfo">
+        <id property="id" column="id"/>
+        <result column="delete_flag" property="deleteFlag"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+    <select id="selectUserById3" resultMap="BaseMap">
+        SELECT id, username, `password`, age, gender, phone,
+        delete_flag, create_time, update_time
+        FROM user_info WHERE id = #{id}
+    </select>
+</mapper>

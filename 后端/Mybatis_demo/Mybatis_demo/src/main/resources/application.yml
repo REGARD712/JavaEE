@@ -11,3 +11,5 @@ mybatis:
   configuration: # 配置打印 MyBatis⽇志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true  #自动驼峰转换
+  # 配置 mybatis xml 的⽂件路径，在 resources/mapper 创建所有表的 xml ⽂件
+  mapper-locations: classpath*:mapper/*.xml
