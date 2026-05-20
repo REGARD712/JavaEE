@@ -1,8 +1,6 @@
 package org.me.mybatis_demo.mapper;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.me.mybatis_demo.model.UserInfo;
 
 import java.util.List;
@@ -11,25 +9,55 @@ import java.util.List;
 public interface UserInfoMapper {
     // 简单查询所有用户
     @Select("SELECT * FROM user_info")
-    public List<UserInfo> selectAll();
+    List<UserInfo> selectAll();
 
     // 参数传递：根据id查询用户
     @Select("SELECT * FROM user_info WHERE id = #{id}")
-    public UserInfo selectById(Integer id);
+    UserInfo selectById(Integer id);
 
     @Select("SELECT * FROM user_info WHERE id = #{aa}")
-    public UserInfo selectById2(@Param("aa") Integer id);
+    UserInfo selectById2(@Param("aa") Integer id);
 
     @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{userName}")
-    public UserInfo selectByName(String userName);
+    UserInfo selectByName(String userName);
 
     // 传递多个参数
     @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{userName} AND `password` = #{passWord}")
-    public UserInfo selectByNameAndPwd(String userName, String passWord);
+    UserInfo selectByNameAndPwd(String userName, String passWord);
 
     @Select("SELECT id, username, `password`, age, gender, phone FROM user_info WHERE username = #{username} AND `password` = #{password}")
-    public UserInfo selectByNameAndPwd2(@Param("username") String userName, @Param("password") String passWord);
+    UserInfo selectByNameAndPwd2(@Param("username") String userName, @Param("password") String passWord);
 
-    @Select("SELECT id, username, `password`, age, gender, phone, delete_flag AS deleteFlag, create_time AS createTime, update_time AS updateTime FROM user_info WHERE username = #{userName} AND `password` = #{passWord}")
-    public UserInfo selectByInfo(String userName, String passWord);
+    @Select("SELECT id, username, `password`, age, gender, phone, " +
+            "delete_flag AS deleteFlag, " +
+            "create_time AS createTime, " +
+            "update_time AS updateTime " +
+            "FROM user_info " +
+            "WHERE username = #{userName} AND `password` = #{passWord}")
+    UserInfo selectByInfo(String userName, String passWord);
+
+    @Select("SELECT id, username, `password`, age, gender, phone, " +
+            "delete_flag, create_time, update_time " +
+            "FROM user_info " +
+            "WHERE username = #{userName} AND `password` = #{passWord}")
+    UserInfo selectByInfo2(String userName, String passWord);
+
+    @Insert("insert into user_info (username, `password`, age, gender, phone) " +
+            "value (#{username}, #{password}, #{age}, #{gender}, #{phone})")
+    Integer insertUser(UserInfo userInfo);
+
+    @Insert("insert into user_info (username, `password`, age, gender, phone) " +
+            "value (#{userinfo.username}, #{userinfo.password}, #{userinfo.age}, #{userinfo.gender}, #{userinfo.phone})")
+    Integer insertUser2(@Param("userinfo") UserInfo userInfo);
+
+    @Options(useGeneratedKeys = true, keyProperty = "id")
+    @Insert("insert into user_info (username, `password`, age, gender, phone) " +
+            "value (#{userinfo.username}, #{userinfo.password}, #{userinfo.age}, #{userinfo.gender}, #{userinfo.phone})")
+    Integer insertUser3(@Param("userinfo") UserInfo userInfo);
+
+    @Delete("delete from user_info where id = #{id}")
+    Integer deleteUser(Integer id);
+
+    @Update("update user_info set phone = '10239429810' where id = #{id}")
+    Integer updateUser(Integer id);
 }
