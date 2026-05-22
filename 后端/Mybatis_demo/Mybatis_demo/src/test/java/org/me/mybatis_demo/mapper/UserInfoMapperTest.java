@@ -123,8 +123,59 @@ class UserInfoMapperTest {
     }
 
     @Test
-    void seleteUser() {
-        List<UserInfo> userInfoList = userInfoMapper.seleteUser(3);
+    void selectUser() {
+        List<UserInfo> userInfoList = userInfoMapper.selectUser(3);
         System.out.println(userInfoList);
+    }
+
+    @Test
+    void selectUserById() {
+        System.out.println(userInfoMapper.selectUserById(3));
+    }
+
+    @Test
+    void selectUserById2() {
+        System.out.println(userInfoMapper.selectUserById2(6));
+    }
+
+    @Test
+    void selectUserByPassword() {
+        System.out.println(userInfoMapper.selectUserByPassword("admin"));
+    }
+
+    @Test
+    void selectUserByPassword2() {
+//        System.out.println(userInfoMapper.selectUserByPassword2("admin"));
+        System.out.println(userInfoMapper.selectUserByPassword2("' or 1 = '1")); // SQL注入
+    }
+
+    @Test
+    void selectUserByUsername() {
+        System.out.println(userInfoMapper.selectUserByUsername("zhangsan"));
+    }
+
+    @Test
+    void selectUserByUsername2() {
+        System.out.println(userInfoMapper.selectUserByUsername2("zhangsan"));
+    }
+
+    @Test
+    void selectByOrder() {
+        userInfoMapper.selectByOrder("desc").stream().forEach(x-> System.out.println(x));
+//        List<UserInfo> userInfoList = userInfoMapper.selectByOrder("desc");
+//        for (UserInfo userInfo : userInfoList) {
+//            System.out.println(userInfo);
+//        }
+    }
+
+    @Test
+    void selectByLike() {
+//        userInfoMapper.selectByLike("a").stream().forEach(x-> System.out.println(x));
+        userInfoMapper.selectByLike("' or 1 = '1' -- ").stream().forEach(x-> System.out.println(x));
+    }
+
+    @Test
+    void selectByLike2() {
+        userInfoMapper.selectByLike2("n").stream().forEach(x-> System.out.println(x));
     }
 }

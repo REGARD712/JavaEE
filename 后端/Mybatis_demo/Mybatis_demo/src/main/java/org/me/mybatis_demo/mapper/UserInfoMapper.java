@@ -67,5 +67,32 @@ public interface UserInfoMapper {
             @Result(column = "update_time", property = "updateTime")
     })
     @Select("SELECT * FROM user_info WHERE id = #{id}")
-    List<UserInfo> seleteUser(Integer id);
+    List<UserInfo> selectUser(Integer id);
+
+    @Select("SELECT * FROM user_info WHERE id = #{id}")
+    UserInfo selectUserById(Integer id);
+
+    @Select("SELECT * FROM user_info WHERE id = ${id}")
+    UserInfo selectUserById2(Integer id);
+
+    @Select("SELECT * FROM user_info WHERE `password` = #{password}")
+    UserInfo selectUserByPassword(String password);
+
+    @Select("SELECT * FROM user_info WHERE `password` = '${password}'")
+    List<UserInfo> selectUserByPassword2(String password);
+
+    @Select("SELECT * FROM user_info WHERE username = #{username}")
+    UserInfo selectUserByUsername(String username);
+
+    @Select("SELECT * FROM user_info WHERE username = '${username}'")
+    UserInfo selectUserByUsername2(String username);
+
+    @Select("SELECT * FROM user_info ORDER BY id ${order}")
+    List<UserInfo> selectByOrder(String order);
+
+    @Select("SELECT * FROM user_info WHERE username Like '%${key}%'")
+    List<UserInfo> selectByLike(String key);
+
+    @Select("SELECT * FROM user_info WHERE username Like CONCAT('%', '${key}', '%')")
+    List<UserInfo> selectByLike2(String key);
 }
