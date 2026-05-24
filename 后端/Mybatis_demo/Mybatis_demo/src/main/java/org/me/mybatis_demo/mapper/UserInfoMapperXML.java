@@ -22,6 +22,9 @@ public interface UserInfoMapperXML {
 
     // 修改
     Integer updateUser(Integer deleteFlag, Integer id);
+    // 动态修改
+    Integer updateUserByCondition(UserInfo userInfo);
+    Integer updateUserBySet(UserInfo userInfo);
 
     // 简单查询操作
     List<UserInfo> selectUser();

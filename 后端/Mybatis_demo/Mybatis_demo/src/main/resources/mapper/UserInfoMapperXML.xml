@@ -81,6 +81,43 @@
     <update id="updateUser">
         UPDATE user_info SET delete_flag = #{deleteFlag} WHERE id = #{id}
     </update>
+    <update id="updateUserByCondition">
+        UPDATE user_info
+        SET
+            <trim suffixOverrides=",">
+                <if test="password!=null">
+                    `password` = #{password},
+                </if>
+                <if test="age!=null">
+                    age = #{age},
+                </if>
+                <if test="gender!=null">
+                    gender = #{gender},
+                </if>
+                <if test="phone!=null">
+                    phone = #{phone}
+                </if>
+            </trim>
+        WHERE id = #{id}
+    </update>
+    <update id="updateUserBySet">
+        UPDATE user_info
+        <set>
+            <if test="password!=null">
+                `password` = #{password},
+            </if>
+            <if test="age!=null">
+                age = #{age},
+            </if>
+            <if test="gender!=null">
+                gender = #{gender},
+            </if>
+            <if test="phone!=null">
+                phone = #{phone}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
 
     <!--  查  -->
     <select id="selectUser" resultType="org.me.mybatis_demo.model.UserInfo">

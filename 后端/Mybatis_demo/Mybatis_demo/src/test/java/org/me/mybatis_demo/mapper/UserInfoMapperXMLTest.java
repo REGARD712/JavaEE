@@ -112,4 +112,20 @@ class UserInfoMapperXMLTest {
         UserInfo userInfo = new UserInfo();
         userInfoMapperXML.selectUserByWhere(userInfo).stream().forEach(x-> System.out.println(x));
     }
+
+    @Test
+    void updateUserByCondition() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setPhone("44444444");
+        userInfo.setId(18);
+        userInfoMapperXML.updateUserByCondition(userInfo);
+    }
+
+    @Test
+    void updateUserBySet() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setGender(2);
+        userInfo.setId(16);
+        userInfoMapperXML.updateUserByCondition(userInfo);
+    }
 }
