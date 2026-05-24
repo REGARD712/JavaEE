@@ -18,6 +18,60 @@
         VALUES (#{username}, #{password}, #{age}, #{gender}, #{phone})
     </insert>
 
+    <!--  动态SQL  -->
+    <insert id="insertUserByCondition">
+        INSERT INTO user_info (username, `password`, age,
+        <if test="gender!=null">
+            gender,
+        </if>
+        phone)
+        VALUES (#{username}, #{password}, #{age},
+        <if test="gender!=null">
+            #{gender},
+        </if>
+        #{phone})
+    </insert>
+
+    <insert id="insertUserByTrim">
+        INSERT INTO user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                username,
+            </if>
+            <if test="password!=null">
+                `password`,
+            </if>
+            <if test="age!=null">
+                age,
+            </if>
+            <if test="gender!=null">
+                gender,
+            </if>
+            <if test="phone!=null">
+                phone
+            </if>
+        </trim>
+
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="username!=null">
+                #{username},
+            </if>
+            <if test="password!=null">
+                #{password},
+            </if>
+            <if test="age!=null">
+                #{age},
+            </if>
+            <if test="gender!=null">
+                #{gender},
+            </if>
+            <if test="phone!=null">
+                #{phone}
+            </if>
+        </trim>
+    </insert>
+
     <!--  删  -->
     <delete id="deleteUser">
         DELETE FROM user_info WHERE id = #{id}
@@ -55,5 +109,29 @@
         SELECT id, username, `password`, age, gender, phone,
         delete_flag, create_time, update_time
         FROM user_info WHERE id = #{id}
+    </select>
+    <select id="selectUserByCondition" resultType="org.me.mybatis_demo.model.UserInfo">
+        SELECT * FROM user_info
+        WHERE
+        <trim prefixOverrides="AND">
+            <if test="phone!=null">
+                phone = #{phone}
+            </if>
+            <if test="deleteFlag!=null">
+                AND delete_flag = #{deleteFlag}
+            </if>
+        </trim>
+    </select>
+
+    <select id="selectUserByWhere" resultType="org.me.mybatis_demo.model.UserInfo">
+        SELECT * FROM user_info
+        <where>
+            <if test="phone!=null">
+                phone = #{phone}
+            </if>
+            <if test="deleteFlag!=null">
+                AND delete_flag = #{deleteFlag}
+            </if>
+        </where>
     </select>
 </mapper>

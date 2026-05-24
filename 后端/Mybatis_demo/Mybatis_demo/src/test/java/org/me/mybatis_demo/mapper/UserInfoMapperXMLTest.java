@@ -77,4 +77,39 @@ class UserInfoMapperXMLTest {
     void updateUser() {
         System.out.println("影响行数：" + userInfoMapperXML.updateUser(1, 6));
     }
+
+    @Test
+    void insertUserByCondition() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("username2");
+        userInfo.setPassword("password2");
+//        userInfo.setAge(22);
+        userInfo.setGender(2);
+        userInfo.setPhone("22222222");
+        System.out.println(userInfoMapperXML.insertUserByCondition(userInfo));
+    }
+
+    @Test
+    void insertUserByTrim() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setUsername("username4");
+        userInfo.setPassword("password4");
+        userInfo.setAge(44);
+        userInfo.setGender(4);
+//        userInfo.setPhone("44444444");
+        System.out.println(userInfoMapperXML.insertUserByCondition(userInfo));
+    }
+
+    @Test
+    void selectUserByCondition() {
+        UserInfo userInfo = new UserInfo();
+//        userInfo.setDeleteFlag(1);
+        userInfoMapperXML.selectUserByCondition(userInfo).stream().forEach(x-> System.out.println(x));
+    }
+
+    @Test
+    void selectUserByWhere() {
+        UserInfo userInfo = new UserInfo();
+        userInfoMapperXML.selectUserByWhere(userInfo).stream().forEach(x-> System.out.println(x));
+    }
 }
