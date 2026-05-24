@@ -5,6 +5,9 @@ import org.me.mybatis_demo.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -127,5 +130,12 @@ class UserInfoMapperXMLTest {
         userInfo.setGender(2);
         userInfo.setId(16);
         userInfoMapperXML.updateUserByCondition(userInfo);
+    }
+
+    @Test
+    void deleteUserByList() {
+        List<Integer> idList = new ArrayList<>();
+        idList.add(14); idList.add(16); idList.add(17); idList.add(18);
+        userInfoMapperXML.deleteUserByList(idList);
     }
 }

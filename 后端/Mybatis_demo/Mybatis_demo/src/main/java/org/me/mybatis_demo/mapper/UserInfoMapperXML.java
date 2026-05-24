@@ -19,6 +19,8 @@ public interface UserInfoMapperXML {
 
     // 删除
     Integer deleteUser(Integer id);
+    // 动态删除列表
+    Integer deleteUserByList(List<Integer> idList);
 
     // 修改
     Integer updateUser(Integer deleteFlag, Integer id);

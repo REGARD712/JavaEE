@@ -76,6 +76,14 @@
     <delete id="deleteUser">
         DELETE FROM user_info WHERE id = #{id}
     </delete>
+    <delete id="deleteUserByList">
+        DELETE FROM user_info
+        WHERE id IN
+--           (14, 16, 17, 18)
+        <foreach collection="idList" open="(" close=")" separator="," item="id">
+            #{id}
+        </foreach>
+    </delete>
 
     <!--  改  -->
     <update id="updateUser">
