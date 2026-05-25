@@ -1,0 +1,12 @@
+<script src="JS/jquery-3.7.1.min.js"></script>
+<script>
+    // 通过ajax构造HTTP的GET请求
+    $.ajax({
+        type: 'get',
+        url: 'https://www.sougou.com',
+        success: function(data) {
+            console.log("触发回调函数")
+        }
+    });
+    console.log("浏览器继续往下执行后续代码")
+</script>
