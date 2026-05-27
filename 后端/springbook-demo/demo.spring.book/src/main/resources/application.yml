@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: demo.spring.book
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/mycnblog?characterEncoding=utf8&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  # ?? Mybatis ? xml ????
+  mybatis:
+    configuration: # ???? MyBatis ??? SQL
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      map-underscore-to-camel-case: true  #??????
+  # ???? MyBatis ??? SQL
+  logging:
+    file:
+      name: logs/springboot.log
