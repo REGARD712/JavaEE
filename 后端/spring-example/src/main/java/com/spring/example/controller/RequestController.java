@@ -1,5 +1,6 @@
-package com.spring.example;
+package com.spring.example.controller;
 
+import com.spring.example.model.UserInfo;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

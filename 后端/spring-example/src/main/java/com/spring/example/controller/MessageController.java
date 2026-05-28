@@ -1,5 +1,6 @@
-package com.spring.example;
+package com.spring.example.controller;
 
+import com.spring.example.model.MessageInfo;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 

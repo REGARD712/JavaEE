@@ -2,6 +2,7 @@ package com.spring.example;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spring.example.model.UserInfo;
 import org.junit.jupiter.api.Test;
 
 public class JsonTest {

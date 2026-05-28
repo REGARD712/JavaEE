@@ -1,4 +1,4 @@
-package com.spring.example;
+package com.spring.example.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;

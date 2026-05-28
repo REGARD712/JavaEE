@@ -1,4 +1,4 @@
-package com.spring.example;
+package com.spring.example.model;
 
 public class UserInfo {
     private String username;

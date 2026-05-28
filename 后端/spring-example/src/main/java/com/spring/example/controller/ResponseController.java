@@ -1,10 +1,10 @@
-package com.spring.example;
+package com.spring.example.controller;
 
+import com.spring.example.model.UserInfo;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/response")
 //@RestController
