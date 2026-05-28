@@ -128,8 +128,15 @@
     </update>
 
     <!--  查  -->
+<!--  抽取重复部分  -->
+    <sql id="allColumn">
+        id, username, `password`, age, gender, phone,
+        delete_flag, create_time, update_time
+    </sql>
     <select id="selectUser" resultType="org.me.mybatis_demo.model.UserInfo">
-        SELECT * FROM user_info
+        SELECT
+        <include refid="allColumn"></include>
+        FROM user_info
     </select>
 
     <select id="selectUserById" resultType="org.me.mybatis_demo.model.UserInfo">
