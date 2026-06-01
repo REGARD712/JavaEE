@@ -1,17 +1,13 @@
 spring:
   application:
     name: demo.spring.book
+  # 数据库连接配置
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/mycnblog?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://127.0.0.1:3306/book_test?characterEncoding=utf8&useSSL=false
     username: root
-    password: root
+    password: '1308670712.'
     driver-class-name: com.mysql.cj.jdbc.Driver
-  # ?? Mybatis ? xml ????
-  mybatis:
-    configuration: # ???? MyBatis ??? SQL
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-      map-underscore-to-camel-case: true  #??????
-  # ???? MyBatis ??? SQL
-  logging:
-    file:
-      name: logs/springboot.log
+mybatis:
+  configuration: # 配置打印 MyBatis⽇志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  #自动驼峰转换
