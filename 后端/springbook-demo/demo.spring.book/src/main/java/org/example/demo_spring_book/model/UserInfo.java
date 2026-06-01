@@ -8,8 +8,8 @@ import java.util.Date;
 public class UserInfo {
     private  Integer id;
     private String userName;
-    private  String password;
-    private  Integer deleteFlag;
+    private String password;
+    private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
 }
