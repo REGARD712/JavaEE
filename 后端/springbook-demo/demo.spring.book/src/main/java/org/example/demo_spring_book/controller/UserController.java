@@ -1,5 +1,7 @@
 package org.example.demo_spring_book.controller;
 
+import jakarta.servlet.http.HttpSession;
+import org.example.demo_spring_book.model.UserInfo;
 import org.example.demo_spring_book.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
@@ -14,19 +16,26 @@ public class UserController {
     private UserInfoService userInfoService;
 
     @PostMapping("/login")
-    public boolean login (String userName, String password) {
+    public boolean login (String name, String password, HttpSession session) {
         // 校验数据是否为空
-        if (!StringUtils.hasLength(userName) || !StringUtils.hasLength(password))
+        if (!StringUtils.hasLength(name) || !StringUtils.hasLength(password))
             return false;
 
-        // 根据userName查询数据库，比较password是否相等
-        String dbPassword = userInfoService.login(userName);
-        if (StringUtils.hasLength(dbPassword) && dbPassword.equals(password)) {
+        // 根据name查询数据库，比较password是否相等
+        UserInfo userInfo = userInfoService.getUserInfoByName(name);
+        // 防止userInfo为空
+        if (userInfo == null) return false;
+        if (StringUtils.hasLength(userInfo.getPassword()) && userInfo.getPassword().equals(password)) {
+            // 密码正确
+            // 清空password字段，防止泄露
+            userInfo.setPassword("");
+            // 存储到session中
+            session.setAttribute("userKey", userInfo);
             return true;
         }
-//        // 暂定userName为admin，password为123456
-//        if ("admin".equals(userName) && "123456".equals(password)) {
-//            session.setAttribute("userName", userName);
+//        // 暂定name为admin，password为123456
+//        if ("admin".equals(name) && "123456".equals(password)) {
+//            session.setAttribute("name", name);
 //            return true;
 //        }
 

@@ -1,6 +1,7 @@
 package org.example.demo_spring_book.service;
 
 import org.example.demo_spring_book.mapper.UserInfoMapper;
+import org.example.demo_spring_book.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,7 +10,7 @@ public class UserInfoService {
     @Autowired
     private UserInfoMapper userInfoMapper;
 
-    public String login(String userName) {
-        return userInfoMapper.login(userName);
+    public UserInfo getUserInfoByName(String name) {
+        return userInfoMapper.getUserInfoByName(name);
     }
 }
