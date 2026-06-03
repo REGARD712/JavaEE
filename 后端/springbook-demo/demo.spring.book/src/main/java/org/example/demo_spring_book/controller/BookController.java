@@ -2,13 +2,12 @@ package org.example.demo_spring_book.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.example.demo_spring_book.model.BookInfo;
+import org.example.demo_spring_book.model.PageRequest;
+import org.example.demo_spring_book.model.PageResponse;
 import org.example.demo_spring_book.service.BookInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -64,4 +63,8 @@ public class BookController {
 //    public List<BookInfo> getList () {
 //        return bookInfoService.getList();
 //    }
+    @GetMapping("/getListByPage")
+    public PageResponse<BookInfo> getListByPage(PageRequest pageRequest) {
+        return bookInfoService.getListByPage(pageRequest);
+    }
 }
