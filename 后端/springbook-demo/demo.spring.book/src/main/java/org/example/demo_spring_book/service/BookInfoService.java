@@ -28,6 +28,20 @@ public class BookInfoService {
     public PageResponse<BookInfo> getListByPage(PageRequest pageRequest) {
         Integer count = bookInfoMapper.count(); // 获取总记录数
         List<BookInfo> bookInfos = bookInfoMapper.queryBookInfoByPage(pageRequest); // 获取图书列表
+        if (count == null || bookInfos == null) {
+            return new PageResponse<>(0, null); // 如果查询失败，返回空列表和0总记录数
+        }
+        // 根据图书记录的status设置statusCN
+        for (BookInfo bookInfo : bookInfos) {
+            if (bookInfo.getStatus() == 1) {
+                bookInfo.setStatusCN("可借阅");
+            } else if (bookInfo.getStatus() == 2) {
+                bookInfo.setStatusCN("已借出");
+            } else if (bookInfo.getStatus() == 0) {
+                bookInfo.setStatusCN("已删除");
+            }
+        }
+
         return new PageResponse<>(count, bookInfos);
     }
 }
