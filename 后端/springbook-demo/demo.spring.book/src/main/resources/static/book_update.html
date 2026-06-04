@@ -59,10 +59,44 @@
     </div>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>
+        // 1.先从后端获取图书信息
+        getBookInfo();
+        function getBookInfo() {
+            $.ajax({
+                type: "get",
+                url: "/book/queryBookById" + location.search,
+                success: function(bookInfo) {
+                    if (bookInfo != null) {
+                        // 将后端的值赋给前端的对应字段
+                        $("#bookId").val(bookInfo.id);
+                        $("#bookName").val(bookInfo.bookName);
+                        $("#bookAuthor").val(bookInfo.author);
+                        $("#bookStock").val(bookInfo.count);
+                        $("#bookPrice").val(bookInfo.price);
+                        $("#bookPublisher").val(bookInfo.publish);
+                        $("bookStatus").val(bookInfo.status);
+                    }
+                }
+            });
+        }
         
+        // 2.更新图书的信息
         function update() {
-            alert("更新成功");
-            location.href = "book_list.html"
+            // 在更新之前需要做参数的校验处理，此处省略
+            $.ajax({
+                type: "post",
+                url: "/book/updateBook",
+                data: $("#updateBook").serialize(), // 提交form表单作为参数给后端
+                success: function(result) {
+                    if (result == "") {
+                        // 更新成功
+                        location.href = "book_list.html"
+                    } else {
+                        // 更新失败
+                        alert(result);
+                    }
+                }
+            });
         }
     </script>
 </body>

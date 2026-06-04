@@ -1,6 +1,7 @@
 package org.example.demo_spring_book.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.example.demo_spring_book.enums.BookStatusEnum;
 import org.example.demo_spring_book.model.BookInfo;
 import org.example.demo_spring_book.model.PageRequest;
 import org.example.demo_spring_book.model.PageResponse;
@@ -85,6 +86,23 @@ public class BookController {
         } catch (Exception e) {
             log.error("更新图书信息异常，e: ", e);
             return "更新图书信息异常";
+        }
+    }
+
+    @RequestMapping("/deleteBook")
+    public String deleteBook(Integer bookId) {
+        log.info("删除图书，bookId: {}", bookId);
+        try {
+            // 逻辑删除：利用update接口更新图书的status为0即可
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.setId(bookId);
+            bookInfo.setStatus(BookStatusEnum.DELETED.getCode());
+            bookInfoService.updateBook(bookInfo);
+            // 删除成功
+            return "";
+        } catch (Exception e) {
+            log.error("删除图书异常，e: ", e);
+            return "删除图书异常";
         }
     }
 }
