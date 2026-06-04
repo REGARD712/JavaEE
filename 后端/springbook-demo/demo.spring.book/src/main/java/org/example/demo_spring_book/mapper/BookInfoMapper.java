@@ -3,6 +3,7 @@ package org.example.demo_spring_book.mapper;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.example.demo_spring_book.model.BookInfo;
 import org.example.demo_spring_book.model.PageRequest;
 import org.example.demo_spring_book.model.PageResponse;
@@ -21,4 +22,10 @@ public interface BookInfoMapper {
 
     @Select("SELECT count(1) FROM book_info WHERE `status` != 0")
     Integer count();
+
+    @Select("SELECT * FROM book_info WHERE `id` = #{bookId}")
+    BookInfo queryBookById(Integer bookId);
+
+    // 采用动态SQL处理，但是注解实现比较麻烦，因此采用XML的方式实现
+    Integer updateBook(BookInfo bookInfo);
 }

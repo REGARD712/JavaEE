@@ -37,4 +37,12 @@ public class BookInfoService {
         pageResponse.setPageRequest(pageRequest); // 将请求中的分页信息返回给前端
         return pageResponse;
     }
+
+    public BookInfo queryBookById(Integer bookId) {
+        return bookInfoMapper.queryBookById(bookId);
+    }
+
+    public void updateBook(BookInfo bookInfo) {
+        bookInfoMapper.updateBook(bookInfo);
+    }
 }
