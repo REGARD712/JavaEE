@@ -59,10 +59,6 @@ public class BookController {
         }
     }
 
-//    @RequestMapping("/getList")
-//    public List<BookInfo> getList () {
-//        return bookInfoService.getList();
-//    }
     @GetMapping("/getListByPage")
     public PageResponse<BookInfo> getListByPage(PageRequest pageRequest) {
         // 打印日志
