@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.demo_spring_book.mapper.BookInfoMapper">
-
     <update id="updateBook">
         UPDATE book_info
         <set>
@@ -16,10 +15,10 @@
                 count = #{count},
             </if>
             <if test="price!=null">
-                price = #{price}
+                price = #{price},
             </if>
             <if test="publish!=null">
-                publish = #{publish}
+                publish = #{publish},
             </if>
             <if test="status!=null">
                 status = #{status}
