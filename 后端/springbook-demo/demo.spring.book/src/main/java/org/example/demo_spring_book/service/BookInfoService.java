@@ -12,8 +12,6 @@ import java.util.List;
 
 @Component
 public class BookInfoService {
-//    @Autowired
-//    bookDao bookDao;
     @Autowired
     private BookInfoMapper bookInfoMapper;
 
