@@ -67,13 +67,7 @@ public class BookController {
     public PageResponse<BookInfo> getListByPage(PageRequest pageRequest) {
         // 打印日志
         log.info("获取图书列表，pageRequest: {}", pageRequest);
-        // 1.校验数据
-        if (pageRequest.getOffset() == null || pageRequest.getOffset() < 0
-         || pageRequest.getPageSize() == null || pageRequest.getPageSize() < 0) {
-            log.error("分页参数不合法, request: {}", pageRequest);
-            return new PageResponse<>(0, null);
-        }
-        // 2.调用service层处理
+        // 调用service层处理
         return bookInfoService.getListByPage(pageRequest);
     }
 }

@@ -15,7 +15,7 @@ public interface BookInfoMapper {
             "VALUES (#{bookName}, #{author}, #{count}, #{price}, #{publish}, #{status})")
     Integer addBook(BookInfo bookInfo);
 
-    @Select("SELECT `book_name`, `author`, `count`, `price`, `publish`, `status` " +
+    @Select("SELECT `id`, `book_name`, `author`, `count`, `price`, `publish`, `status` " +
             "FROM book_info WHERE `status` != 0 LIMIT #{offset}, #{pageSize}")
     List<BookInfo> queryBookInfoByPage(PageRequest pageRequest);
 

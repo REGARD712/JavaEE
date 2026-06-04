@@ -26,12 +26,17 @@ public class BookInfoService {
         Integer count = bookInfoMapper.count(); // 获取总记录数
         List<BookInfo> bookInfos = bookInfoMapper.queryBookInfoByPage(pageRequest); // 获取图书列表
         if (count == null || bookInfos == null) {
-            return new PageResponse<>(0, null); // 如果查询失败，返回空列表和0总记录数
+            return null; // 如果查询失败，返回空
         }
         // 将状态码转换为中文描述
         for (BookInfo bookInfo : bookInfos) {
             bookInfo.setStatusCN(BookStatusEnum.getStatusByCode(bookInfo.getStatus()).getDesc());
         }
-        return new PageResponse<>(count, bookInfos);
+        // 构造分页响应对象
+        PageResponse<BookInfo> pageResponse = new PageResponse<>();
+        pageResponse.setTotal(count);
+        pageResponse.setRecords(bookInfos);
+        pageResponse.setPageRequest(pageRequest); // 将请求中的分页信息返回给前端
+        return pageResponse;
     }
 }
