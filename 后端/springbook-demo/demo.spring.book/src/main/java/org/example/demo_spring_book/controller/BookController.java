@@ -105,4 +105,17 @@ public class BookController {
             return "删除图书异常";
         }
     }
+
+    @RequestMapping("/batchDelete")
+    public String batchDelete(@RequestParam List<Integer> ids) {
+        log.info("批量删除图书，ids: {}", ids);
+        try {
+            bookInfoService.batchDelete(ids);
+            // 成功
+            return "";
+        } catch (Exception e) {
+            log.error("批量删除图书异常，e: ", e);
+            return "批量删除图书异常";
+        }
+    }
 }

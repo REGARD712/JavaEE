@@ -26,4 +26,13 @@
         </set>
         WHERE id = #{id}
     </update>
+
+    <update id="batchDelete">
+        UPDATE book_info
+        SET status = 0
+        WHERE id IN
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 </mapper>

@@ -101,18 +101,21 @@
             }
     
             function deleteBook(id) {
-                $.ajax({
-                    type: "post",
-                    url: "/book/deleteBook?bookId=" + id,
-                    success: function(result) {
-                        if (result == "") {
-                            // 删除成功
-                            location.href = "book_list.html";
-                        } else {
-                            alert(result);
+                var isDelete = confirm("确认删除？");
+                if (isDelete) {
+                    $.ajax({
+                        type: "post",
+                        url: "/book/deleteBook?bookId=" + id,
+                        success: function(result) {
+                            if (result == "") {
+                                // 删除成功
+                                location.href = "book_list.html";
+                            } else {
+                                alert(result);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
 
             function batchDelete() {
@@ -123,8 +126,23 @@
                     $("input:checkbox[name='selectBook']:checked").each(function () {
                         ids.push($(this).val());
                     });
-                    console.log(ids);
-                    alert("批量删除成功");
+                    $.ajax({
+                        type: "post",
+                        url: "/book/batchDelete?ids=" + ids,
+                        // 也可以通过 data 传参
+                        // data: {
+                        //     'ids': ids
+                        // }
+                        success: function(result) {
+                            if (result == "") {
+                                // 成功
+                                location.href = "book_list.html";
+                            } else {
+                                // 失败
+                                alert(result);
+                            }
+                        }
+                    });
                 }
             }
 
