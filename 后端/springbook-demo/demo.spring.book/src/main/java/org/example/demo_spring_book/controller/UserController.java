@@ -1,6 +1,7 @@
 package org.example.demo_spring_book.controller;
 
 import jakarta.servlet.http.HttpSession;
+import org.example.demo_spring_book.constants.Constant;
 import org.example.demo_spring_book.model.UserInfo;
 import org.example.demo_spring_book.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +30,10 @@ public class UserController {
             // 密码正确
             // 清空password字段，防止泄露
             userInfo.setPassword("");
-            // 存储到session中
-            session.setAttribute("userKey", userInfo);
+            // 存储到session中：用常量封装
+            session.setAttribute(Constant.SESSION_USER_KEY, userInfo);
             return true;
         }
-//        // 暂定name为admin，password为123456
-//        if ("admin".equals(name) && "123456".equals(password)) {
-//            session.setAttribute("name", name);
-//            return true;
-//        }
-
         return false;
     }
 }
