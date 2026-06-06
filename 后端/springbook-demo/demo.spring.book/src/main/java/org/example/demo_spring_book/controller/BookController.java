@@ -21,7 +21,7 @@ public class BookController {
     @Autowired
     BookInfoService bookInfoService;
 
-    @PostMapping("/addBook")
+    @RequestMapping("/addBook")
     public Result addBook(BookInfo bookInfo) {
         // 打印日志
         log.info("添加图书, request: {}", bookInfo);
@@ -42,9 +42,12 @@ public class BookController {
         }
     }
 
-    @GetMapping("/getListByPage")
+    @RequestMapping("/getListByPage")
     public Result<PageResponse<BookInfo>> getListByPage(PageRequest pageRequest, HttpSession session) {
         // 检验用户是否已登陆
+        if (session.getAttribute(Constant.SESSION_USER_KEY) == null) {
+            return Result.unlogin();
+        }
         UserInfo userInfo = (UserInfo) session.getAttribute(Constant.SESSION_USER_KEY);
         if (userInfo == null || userInfo.getId() <= 0) {
             // 用户未登录

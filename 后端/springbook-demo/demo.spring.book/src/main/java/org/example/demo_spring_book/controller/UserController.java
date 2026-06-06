@@ -16,7 +16,7 @@ public class UserController {
     @Autowired
     private UserInfoService userInfoService;
 
-    @PostMapping("/login")
+    @RequestMapping("/login")
     public boolean login (String name, String password, HttpSession session) {
         // 校验数据是否为空
         if (!StringUtils.hasLength(name) || !StringUtils.hasLength(password))

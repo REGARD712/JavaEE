@@ -55,10 +55,17 @@
                     url: "/book/getListByPage" + location.search, // search得到这部分："?currentPage=page"
                     success: function(result) {
                         // 校验
-                        if (result == null || result.records == null || result.pageRequest == null) {
+                        if (result == null || result.code == "UNLOGIN") {
+                            // 这种情况是用户未登录
+                            alert("用户未登录，请登录后重试");
+                            location.href = "login.html";
+                        }
+                        if (result == null || result.data == null) {
+                            // 这种情况是返回的数据出错
                             return;
                         }
-                        var books = result.records;
+                        var data = result.data;
+                        var books = data.records;
                         var finalHtml = "";
                         for (var book of books) {
                             finalHtml += '<tr>';
@@ -80,10 +87,10 @@
 
                         //翻页信息
                         $("#pageContainer").jqPaginator({
-                            totalCounts: result.total, //总记录数
+                            totalCounts: data.total, //总记录数
                             pageSize: 10,    //每页的个数
                             visiblePages: 5, //可视页数
-                            currentPage: result.pageRequest.currentPage,  //当前页码
+                            currentPage: data.pageRequest.currentPage,  //当前页码
                             first: '<li class="page-item"><a class="page-link">首页</a></li>',
                             prev: '<li class="page-item"><a class="page-link" href="javascript:void(0);">上一页<\/a><\/li>',
                             next: '<li class="page-item"><a class="page-link" href="javascript:void(0);">下一页<\/a><\/li>',
