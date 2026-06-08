@@ -46,7 +46,7 @@ class UserInfoMapperTest {
     void select2() {
         // SElECT id, username, password, age FROM user_info WHERE delete_flag = 0 AND username like "%an%"
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "username", "password", "age")
+        queryWrapper.select("id", "username", "password", "age", "delete_flag")
                 .eq("delete_flag", 0)
                 .like("username", "an");
         userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
