@@ -44,15 +44,6 @@ public class BookController {
 
     @RequestMapping("/getListByPage")
     public Result<PageResponse<BookInfo>> getListByPage(PageRequest pageRequest, HttpSession session) {
-        // 检验用户是否已登陆
-        if (session.getAttribute(Constant.SESSION_USER_KEY) == null) {
-            return Result.unlogin();
-        }
-        UserInfo userInfo = (UserInfo) session.getAttribute(Constant.SESSION_USER_KEY);
-        if (userInfo == null || userInfo.getId() <= 0) {
-            // 用户未登录
-            return Result.unlogin();
-        }
         // 打印日志
         log.info("获取图书列表，pageRequest: {}", pageRequest);
         // 调用service层处理
