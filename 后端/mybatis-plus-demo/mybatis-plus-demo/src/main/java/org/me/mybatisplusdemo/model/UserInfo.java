@@ -1,6 +1,7 @@
 package org.me.mybatisplusdemo.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class UserInfo {
     private Integer age;
     private Integer gender;
     private String phone;
+    @TableField("delete_flag")
     private Integer deleteFlag;
     private Date createTime;
     private Date updateTime;
