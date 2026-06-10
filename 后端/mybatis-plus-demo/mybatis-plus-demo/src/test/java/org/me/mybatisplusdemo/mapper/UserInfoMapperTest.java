@@ -136,4 +136,18 @@ class UserInfoMapperTest {
     void selectAllByAge2() {
         System.out.println(userInfoMapper.selectAllByAge2(22));
     }
+
+    @Test
+    void selectUserInfoByCondition() {
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lt("age", 20); // WHERE age < 20
+        userInfoMapper.selectUserInfoByCondition(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void updateUserInfoByCondition() {
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.in("id", List.of(1, 2, 3)); // WHERE id IN (1, 2, 3)
+        userInfoMapper.updateUserInfoByCondition(10, queryWrapper);
+    }
 }
