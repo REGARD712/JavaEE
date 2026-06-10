@@ -103,6 +103,13 @@
                                 }
                             }
                         });
+                    },
+                    error: function(error) {
+                        if (error.status == 401) {
+                            // 这种情况是用户未登录
+                            alert("用户未登录，请登录后重试");
+                            location.href = "login.html";
+                        }
                     }
                 });
             }
