@@ -2,6 +2,7 @@ package org.me.mybatisplusdemo.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import org.junit.jupiter.api.Test;
 import org.me.mybatisplusdemo.model.UserInfo;
@@ -48,10 +49,11 @@ class UserInfoMapperTest {
     void selectByCondition() {
         // SElECT id, username, password, age FROM user_info WHERE delete_flag = 0 AND username like "%an%"
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("id", "username", "password", "age")
-                .eq("delete_flag", 0)
-                .like("username", "an");
-        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+        LambdaQueryWrapper<UserInfo>  lambdaQueryWrapper = queryWrapper.lambda();
+        lambdaQueryWrapper.select(UserInfo::getId, UserInfo::getUsername, UserInfo::getPassword, UserInfo::getAge, UserInfo::getDeleteFlag)
+                .eq(UserInfo::getDeleteFlag, 0)
+                .like(UserInfo::getUsername, "an");
+        userInfoMapper.selectList(lambdaQueryWrapper).forEach(System.out::println);
     }
 
     @Test
@@ -74,9 +76,10 @@ class UserInfoMapperTest {
         userInfo.setDeleteFlag(1);
         // 2.通过QueryWrapper来设置查询条件
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lt("age", 20);
+        LambdaQueryWrapper<UserInfo> lambdaQueryWrapper = queryWrapper.lambda();
+        lambdaQueryWrapper.lt(UserInfo::getAge, 20);
 
-        userInfoMapper.update(userInfo, queryWrapper);
+        userInfoMapper.update(userInfo, lambdaQueryWrapper);
     }
 
     @Test
@@ -85,8 +88,9 @@ class UserInfoMapperTest {
 
         // 直接通过UpdateWrapper来设置更新的字段和条件
         UpdateWrapper<UserInfo> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.set("delete_flag", 0)
-                .lt("age", 20);
+        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = updateWrapper.lambda();
+        lambdaUpdateWrapper.set(UserInfo::getDeleteFlag, 0)
+                .lt(UserInfo::getAge, 20);
         userInfoMapper.update(updateWrapper);
     }
 
@@ -95,9 +99,10 @@ class UserInfoMapperTest {
         // UPDATE user_info SET delete_flag = 0, age = 5 WHERE id IN (1, 2, 3)
 
         UpdateWrapper<UserInfo> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.setSql("delete_flag = 0, age = 5")
-                .in("id", List.of(1, 2, 3));
-        userInfoMapper.update(updateWrapper);
+        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = updateWrapper.lambda();
+        lambdaUpdateWrapper.setSql("delete_flag = 0, age = 5")
+                .in(UserInfo::getId, List.of(1, 2, 3));
+        userInfoMapper.update(lambdaUpdateWrapper);
     }
 
     @Test
@@ -105,9 +110,10 @@ class UserInfoMapperTest {
         // UPDATE user_info SET age = age + 10 WHERE id IN (1, 2, 3)
 
         UpdateWrapper<UserInfo> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.setSql("age = age + 10")
-                .in("id", List.of(1, 2, 3));
-        userInfoMapper.update(updateWrapper);
+        LambdaUpdateWrapper<UserInfo> lambdaUpdateWrapper = updateWrapper.lambda();
+        lambdaUpdateWrapper.setSql("age = age + 10")
+                .in(UserInfo::getId, List.of(1, 2, 3));
+        userInfoMapper.update(lambdaUpdateWrapper);
     }
 
     @Test
@@ -116,7 +122,8 @@ class UserInfoMapperTest {
 
         // 只有WHERE查询条件，只需要通过QueryWrapper来设置即可
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("age", 18);
-        userInfoMapper.delete(queryWrapper);
+        LambdaQueryWrapper<UserInfo> lambdaQueryWrapper = queryWrapper.lambda();
+        lambdaQueryWrapper.eq(UserInfo::getAge, 18);
+        userInfoMapper.delete(lambdaQueryWrapper);
     }
 }
