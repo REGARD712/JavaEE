@@ -126,4 +126,14 @@ class UserInfoMapperTest {
         lambdaQueryWrapper.eq(UserInfo::getAge, 18);
         userInfoMapper.delete(lambdaQueryWrapper);
     }
+
+    @Test
+    void selectById2() {
+        System.out.println(userInfoMapper.selectById2(2));
+    }
+
+    @Test
+    void selectAllByAge2() {
+        System.out.println(userInfoMapper.selectAllByAge2(22));
+    }
 }
