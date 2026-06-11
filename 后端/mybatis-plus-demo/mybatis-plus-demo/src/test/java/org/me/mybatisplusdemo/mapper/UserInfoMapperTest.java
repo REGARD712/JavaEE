@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 class UserInfoMapperTest {
@@ -149,5 +150,71 @@ class UserInfoMapperTest {
         QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
         queryWrapper.in("id", List.of(1, 2, 3)); // WHERE id IN (1, 2, 3)
         userInfoMapper.updateUserInfoByCondition(10, queryWrapper);
+    }
+
+    @Test
+    void selectByCondition3() {
+        // SELECT * FROM user_info WHERE username = "test" AND age = 25
+        // 采用 allEq 方法
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        // WHERE username = "test" AND age = 25
+        queryWrapper.allEq(Map.of("username", "test", "age", 25));
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition4() {
+        // SELECT * FROM user_info WHERE age != 25
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.ne("age", 25);
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition5() {
+        // SELECT * FROM user_info WHERE age > 22
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.gt("age", 22);
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition6() {
+        // SELECT * FROM user_info WHERE age >= 22
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.ge("age", 22);
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition7() {
+        // SELECT * FROM user_info WHERE age BETWEEN 10 AND 20
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.between("age", 10, 20);
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition8() {
+        // SELECT * FROM user_info WHERE age < (SELECT age FROM user_info WHERE age BETWEEN 20 AND 30)
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.ltSql("age", "SELECT age FROM user_info WHERE age BETWEEN 20 AND 30");
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition9() {
+        // SELECT * FROM user_info GROUP BY id
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.groupBy("id");
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
+    }
+
+    @Test
+    void selectByCondition10() {
+        // SELECT * FROM user_info ORDER BY age DESC
+        QueryWrapper<UserInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.orderByDesc("age");
+        userInfoMapper.selectList(queryWrapper).forEach(System.out::println);
     }
 }
