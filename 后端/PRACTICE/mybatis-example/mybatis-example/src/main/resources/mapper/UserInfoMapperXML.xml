@@ -2,8 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.me.mybatisexample.mapper.UserInfoMapperXML">
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user_info (username, `password`, age, gender, phone)
+        VALUES (#{username}, #{password}, #{age}, #{gender}, #{phone})
+    </insert>
+
+    <delete id="deleteUser">
+        DELETE FROM user_info WHERE id = #{id}
+    </delete>
+
+    <update id="updateUser">
+        UPDATE user_info SET username = #{username} WHERE id = #{id}
+    </update>
 
     <select id="queryAllUser" resultType="org.me.mybatisexample.model.UserInfo">
-        SELECT * FROM user_info
+        SELECT * FROM user_info;
     </select>
 </mapper>
