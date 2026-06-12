@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.me.mybatisexample.mapper.UserInfoMapperXML">
+    <resultMap id="BaseMap" type="org.me.mybatisexample.model.UserInfo">
+        <result column="delete_flag" property="deleteFlag"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
     <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO user_info (username, `password`, age, gender, phone)
         VALUES (#{username}, #{password}, #{age}, #{gender}, #{phone})
@@ -16,6 +22,8 @@
     </update>
 
     <select id="queryAllUser" resultType="org.me.mybatisexample.model.UserInfo">
-        SELECT * FROM user_info;
+        SELECT id, username, `password`, age, gender, phone,
+               delete_flag, create_time, update_time
+        FROM user_info;
     </select>
 </mapper>
