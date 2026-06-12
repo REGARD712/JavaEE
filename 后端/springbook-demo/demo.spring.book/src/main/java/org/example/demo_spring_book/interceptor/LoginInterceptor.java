@@ -5,7 +5,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.example.demo_spring_book.constants.Constant;
-import org.example.demo_spring_book.model.Result;
 import org.example.demo_spring_book.model.UserInfo;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
