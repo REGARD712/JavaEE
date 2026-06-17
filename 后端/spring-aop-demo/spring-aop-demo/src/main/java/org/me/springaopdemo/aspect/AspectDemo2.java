@@ -10,11 +10,11 @@ import org.springframework.stereotype.Component;
 public class AspectDemo2 {
     @Before("org.me.springaopdemo.aspect.AspectDemo1.pt()")
     public void doBefore() {
-        log.info("do before...");
+        log.info("AspectDemo2 before...");
     }
 
     @After("org.me.springaopdemo.aspect.AspectDemo1.pt()")
     public void doAfter() {
-        log.info("do after...");
+        log.info("AspectDemo2 after...");
     }
 }
