@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class AspectDemo1 {
     // 定义切点
     @Pointcut("execution(* org.me.springaopdemo.controller.*.*(..))")
-    private void pt() {}
+    public void pt() {}
 
     // 切面
     @Around("pt()")
