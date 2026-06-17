@@ -8,8 +8,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Aspect
 @Component
+// 切面类
 public class AspectDemo1 {
-    @Around("execution(* org.me.springaopdemo.controller.*.*(..))")
+    // 定义切点
+    @Pointcut("execution(* org.me.springaopdemo.controller.*.*(..))")
+    private void pt() {}
+
+    // 切面
+    @Around("pt()")
     public Object timeRecord(ProceedingJoinPoint pjp) throws Throwable {
         log.info("目标方法执行前...");
 
@@ -25,22 +31,22 @@ public class AspectDemo1 {
         return object;
     }
 
-    @Before("execution(* org.me.springaopdemo.controller.*.*(..))")
+    @Before("pt()")
     public void doBefore() {
         log.info("do before...");
     }
 
-    @After("execution(* org.me.springaopdemo.controller.*.*(..))")
+    @After("pt()")
     public void doAfter() {
         log.info("do after...");
     }
 
-    @AfterReturning("execution(* org.me.springaopdemo.controller.*.*(..))")
+    @AfterReturning("pt()")
     public void doAfterReturning() {
         log.info("do afterReturning...");
     }
 
-    @AfterThrowing("execution(* org.me.springaopdemo.controller.*.*(..))")
+    @AfterThrowing("pt()")
     public void doAfterThrowing() {
         log.info("do afterThrowing...");
     }
