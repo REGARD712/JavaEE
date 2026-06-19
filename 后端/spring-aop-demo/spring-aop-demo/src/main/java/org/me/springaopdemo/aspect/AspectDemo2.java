@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Aspect
-@Component
+//@Component
 @Order(1)
 public class AspectDemo2 {
     @Before("org.me.springaopdemo.aspect.AspectDemo1.pt()")

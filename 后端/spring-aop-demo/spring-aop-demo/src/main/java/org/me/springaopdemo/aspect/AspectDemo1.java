@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Aspect
-@Component
+//@Component
 @Order(2)
 // 切面类
 public class AspectDemo1 {

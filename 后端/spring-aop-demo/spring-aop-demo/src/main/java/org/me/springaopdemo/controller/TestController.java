@@ -1,6 +1,7 @@
 package org.me.springaopdemo.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.me.springaopdemo.aspect.MyAspect;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,6 +15,8 @@ public class TestController {
         return 1;
     }
 
+    // 由自定义注解执行指定的方法
+    @MyAspect
     @RequestMapping("/t2")
     public Boolean t2() {
         log.info("执行t2");
