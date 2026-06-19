@@ -2,11 +2,13 @@ package org.me.springaopdemo.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Aspect
 @Component
+@Order(1)
 public class AspectDemo2 {
     @Before("org.me.springaopdemo.aspect.AspectDemo1.pt()")
     public void doBefore() {

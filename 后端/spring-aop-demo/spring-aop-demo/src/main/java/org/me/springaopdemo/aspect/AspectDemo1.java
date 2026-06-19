@@ -3,11 +3,13 @@ package org.me.springaopdemo.aspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Slf4j
 @Aspect
 @Component
+@Order(2)
 // 切面类
 public class AspectDemo1 {
     // 定义切点
