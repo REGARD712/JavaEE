@@ -15,10 +15,10 @@ class UserInfoMapperTest {
         userInfoMapper.queryAllUser().stream().forEach(x-> System.out.println(x));
     }
 
-    @Test
-    void queryById() {
-        System.out.println(userInfoMapper.queryById(4));
-    }
+//    @Test
+//    void queryById() {
+//        System.out.println(userInfoMapper.queryById(4));
+//    }
 
     @Test
     void addUserInfo() {
@@ -40,5 +40,15 @@ class UserInfoMapperTest {
     @Test
     void updateUserInfo() {
         userInfoMapper.updateUserInfo(22, 8);
+    }
+
+//    @Test
+//    void testQueryById() {
+//        System.out.println(userInfoMapper.queryById(4));
+//    }
+
+    @Test
+    void queryByName() {
+        System.out.println(userInfoMapper.queryByName("zhangsan"));
     }
 }

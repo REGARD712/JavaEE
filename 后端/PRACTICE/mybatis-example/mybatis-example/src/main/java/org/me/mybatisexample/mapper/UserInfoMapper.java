@@ -32,10 +32,13 @@ public interface UserInfoMapper {
     //            @Result(column = "create_time", property = "createTime"),
     //            @Result(column = "update_time", property = "updateTime")
     //    })
-    UserInfo queryById(@Param("userId") Integer id);
+    UserInfo queryById3(@Param("userId") Integer id);
 
     @Select("SELECT id, username, `password`, age, gender, phone, " +
             "delete_flag, create_time, update_time FROM user_info WHERE id = #{id}")
 //    @ResultMap(value = "BaseMap")
     UserInfo queryById2(Integer id);
+
+    @Select("SELECT username, `password`, age, gender, phone FROM user_info WHERE username = '${username}'")
+    UserInfo queryByName(String username);
 }
