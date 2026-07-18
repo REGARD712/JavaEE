@@ -15,11 +15,6 @@ class UserInfoMapperTest {
         userInfoMapper.queryAllUser().stream().forEach(x-> System.out.println(x));
     }
 
-//    @Test
-//    void queryById() {
-//        System.out.println(userInfoMapper.queryById(4));
-//    }
-
     @Test
     void addUserInfo() {
         UserInfo userInfo = new UserInfo();
@@ -41,11 +36,6 @@ class UserInfoMapperTest {
     void updateUserInfo() {
         userInfoMapper.updateUserInfo(22, 8);
     }
-
-//    @Test
-//    void testQueryById() {
-//        System.out.println(userInfoMapper.queryById(4));
-//    }
 
     @Test
     void queryByName() {
