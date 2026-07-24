@@ -40,5 +40,11 @@ public interface UserInfoMapper {
     UserInfo queryById2(Integer id);
 
     @Select("SELECT username, `password`, age, gender, phone FROM user_info WHERE username = '${username}'")
-    UserInfo queryByName(String username);
+    List<UserInfo> queryByName(String username);
+
+    @Select("SELECT username, `password`, age, gender, phone FROM user_info ORDER BY id ${sort}")
+    List<UserInfo> queryAllBySort(String sort);
+
+    @Select("SELECT username, `password`, age, gender, phone FROM user_info WHERE username LIKE CONCAT('%', #{key}, '%')")
+    List<UserInfo> queryAllByLike(String key);
 }

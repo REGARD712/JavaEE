@@ -39,6 +39,16 @@ class UserInfoMapperTest {
 
     @Test
     void queryByName() {
-        System.out.println(userInfoMapper.queryByName("zhangsan"));
+        System.out.println(userInfoMapper.queryByName("' OR  1='1"));
+    }
+
+    @Test
+    void queryAllBySort() {
+        userInfoMapper.queryAllBySort("ASC").stream().forEach(x-> System.out.println(x));
+    }
+
+    @Test
+    void queryAllByLike() {
+        userInfoMapper.queryAllByLike("an");
     }
 }
