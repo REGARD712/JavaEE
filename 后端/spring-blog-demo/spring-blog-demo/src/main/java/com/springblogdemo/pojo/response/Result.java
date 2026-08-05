@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class Result {
-    private ResultCodeEnum code;
+    private ResultCodeEnum code; // 业务信息码，非Http信息码
     private String errmsg;
     private Object data;
 
