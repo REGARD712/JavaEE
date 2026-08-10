@@ -4,6 +4,6 @@ import com.springblogdemo.pojo.dataobject.BlogInfo;
 
 import java.util.List;
 
-public interface BlogInfoService {
+public interface BlogService {
     List<BlogInfo> getList();
 }

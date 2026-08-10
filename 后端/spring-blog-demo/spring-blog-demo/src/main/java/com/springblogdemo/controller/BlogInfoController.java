@@ -1,7 +1,7 @@
 package com.springblogdemo.controller;
 
 import com.springblogdemo.pojo.dataobject.BlogInfo;
-import com.springblogdemo.service.BlogInfoService;
+import com.springblogdemo.service.BlogService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,8 +13,8 @@ import java.util.List;
 @RequestMapping("/blog")
 @RestController
 public class BlogInfoController {
-    @Resource(name = "blogInfoServiceImpl")
-    private BlogInfoService blogInfoService;
+    @Resource(name = "blogServiceImpl")
+    private BlogService blogInfoService;
 
     @RequestMapping("/getList")
     public List<BlogInfo> getList() {
