@@ -12,13 +12,13 @@ import java.util.List;
 @Slf4j
 @RequestMapping("/blog")
 @RestController
-public class BlogInfoController {
+public class BlogController {
     @Resource(name = "blogServiceImpl")
-    private BlogService blogInfoService;
+    private BlogService blogService;
 
     @RequestMapping("/getList")
     public List<BlogInfo> getList() {
         log.info("获取博客列表");
-        return blogInfoService.getList();
+        return blogService.getList();
     }
 }
