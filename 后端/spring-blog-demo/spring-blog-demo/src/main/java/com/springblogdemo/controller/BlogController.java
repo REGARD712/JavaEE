@@ -1,6 +1,6 @@
 package com.springblogdemo.controller;
 
-import com.springblogdemo.pojo.dataobject.BlogInfo;
+import com.springblogdemo.pojo.response.BlogInfoResponse;
 import com.springblogdemo.service.BlogService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -17,8 +17,10 @@ public class BlogController {
     private BlogService blogService;
 
     @RequestMapping("/getList")
-    public List<BlogInfo> getList() {
+    public List<BlogInfoResponse> getList() {
         log.info("获取博客列表");
-        return blogService.getList();
+
+        List<BlogInfoResponse> blogInfos = blogService.getList();
+        return blogInfos;
     }
 }
