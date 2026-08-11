@@ -41,28 +41,7 @@
     <script src="js/jquery.min.js"></script>
     <script>
         function login() {
-            $.ajax({
-                type: "post",
-                url: "/user/login",
-                contentType: "application/json",
-                data: JSON.stringify({
-                    userName: $("#username").val(),
-                    password: $("#password").val()
-                }),
-                success: function(result){
-                    if(result!=null && result.code == "SUCCESS"){
-                        //密码正常
-                        localStorage.setItem("loginUserId", result.data.userId);
-                        localStorage.setItem("userToken", result.data.token)
-                        location.href = "blog_list.html";
-                    }else {
-                        //result==null 时未处理
-                        alert(result.errMsg);
-                    }
-                }
-            });
-            // location.assign("blog_list.html");
-
+            location.assign("blog_list.html");
         }
     </script>
 </body>

@@ -26,7 +26,7 @@
         <div class="left">
             <div class="card">
                 <img src="pic/doge.jpg" alt="">
-                <h3></h3>
+                <h3>比特汤老师</h3>
                 <a href="#">GitHub 地址</a>
                 <div class="row">
                     <span>文章</span>
@@ -40,13 +40,22 @@
         </div>
         <div class="right">
             <div class="content">
-                <div class="title"></div>
-                <div class="date"></div>
-                <div class="detail" id="detail" style="background: transparent;">
+                <div class="title">我的第一篇博客</div>
+                <div class="date">2021-06-02</div>
+                <div class="detail">
+                    <p>从今天开始, 好好学习~Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati cumque alias
+                        laborum numquam aliquam? Ipsam aliquam dolorem officiis! Magni pariatur officiis iusto? Et unde
+                        quo fuga, minus deserunt architecto eligendi.</p>
+                    <p>从今天开始, 好好学习~Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati cumque alias
+                        laborum numquam aliquam? Ipsam aliquam dolorem officiis! Magni pariatur officiis iusto? Et unde
+                        quo fuga, minus deserunt architecto eligendi.</p>
+                    <p>从今天开始, 好好学习~Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati cumque alias
+                        laborum numquam aliquam? Ipsam aliquam dolorem officiis! Magni pariatur officiis iusto? Et unde
+                        quo fuga, minus deserunt architecto eligendi.</p>
                 </div>
                 <div class="operating">
-                    <!-- <button onclick="window.location.href='blog_update.html'">编辑</button>
-                    <button onclick="deleteBlog()">删除</button> -->
+                    <button onclick="window.location.href='blog_update.html'">编辑</button>
+                    <button onclick="deleteBlog()">删除</button>
                 </div>
             </div>
 
@@ -61,62 +70,12 @@
     <script src="blog-editormd/editormd.js"></script>
     <script src="js/common.js"></script>
     <script>
-        getBlogDetail();
-
-        var url = "/user/getAuthorInfo" + location.search;
-        getUserInfo(url);
-
-        function getBlogDetail() {
-            $.ajax({
-                type: "get",
-                url: "/blog/getBlogDetail" + location.search,
-                success: function (result) {
-                    if (result.code == "FAIL") {
-                        alert(result.errMsg);
-                        return;
-                    }
-                    if (result.code == "SUCCESS" && result.data != null) {
-                        $(".content .title").text(result.data.title);
-                        $(".content .date").text(result.data.createTime);
-                        // $(".content .detail").text(result.data.content);
-                        editormd.markdownToHTML("detail", {
-                            markdown: result.data.content,
-                        });
-
-                        //判断是否显示编辑/删除按钮
-                        let loginUserId = localStorage.getItem("loginUserId");
-                        if(result.data.userId==loginUserId){
-                            //当前作者是登录用户, 显示按钮
-                            let blogId = result.data.id;
-                            let finalHtml = '<button onclick="window.location.href=\'blog_update.html?blogId='+blogId+'\'">编辑</button>';
-                            finalHtml += '<button onclick="deleteBlog('+blogId+')">删除</button>';
-                            console.log(finalHtml);
-                            
-                            $(".content .operating").html(finalHtml);
-                        }
-                    }
-                }
-            });
-        }
-
-
+        
         //显示博客作者信息
         //var userUrl = "/user/getAuthorInfo" + location.search;
         //getUserInfo(userUrl);
 
-        function deleteBlog(blogId) {
-            $.ajax({
-                type: "post",
-                url: "/blog/delete?blogId=" + blogId,
-                success: function(result){
-                    if(result.code =="SUCCESS" && result.data==true){
-                        //删除成功
-                        location.href = "blog_list.html";
-                    }else{
-                        //TODO 自行完善
-                    }
-                }
-            });
+        function deleteBlog() {
             alert("删除博客");
         }
     </script>
