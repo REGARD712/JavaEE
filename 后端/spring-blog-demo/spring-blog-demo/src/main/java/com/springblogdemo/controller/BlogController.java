@@ -3,6 +3,7 @@ package com.springblogdemo.controller;
 import com.springblogdemo.pojo.response.BlogInfoResponse;
 import com.springblogdemo.service.BlogService;
 import jakarta.annotation.Resource;
+import jakarta.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,9 @@ public class BlogController {
     }
 
     @RequestMapping("/getBlogDetail")
-    public BlogInfoResponse getBlogDetail (Integer blogId) {
+    public BlogInfoResponse getBlogDetail (@NotNull Integer blogId) {
         log.info("获取博客详情，blogId: {}", blogId);
+        // TODO: 这里可以增加参数校验，判断blogId是否为空或小于等于0
         return blogService.getBlogDetail(blogId);
     }
 }
