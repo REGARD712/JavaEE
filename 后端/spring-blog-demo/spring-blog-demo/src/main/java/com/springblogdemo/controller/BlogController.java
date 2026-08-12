@@ -23,4 +23,10 @@ public class BlogController {
         List<BlogInfoResponse> blogInfos = blogService.getList();
         return blogInfos;
     }
+
+    @RequestMapping("/getBlogDetail")
+    public BlogInfoResponse getBlogDetail (Integer blogId) {
+        log.info("获取博客详情，blogId: {}", blogId);
+        return blogService.getBlogDetail(blogId);
+    }
 }

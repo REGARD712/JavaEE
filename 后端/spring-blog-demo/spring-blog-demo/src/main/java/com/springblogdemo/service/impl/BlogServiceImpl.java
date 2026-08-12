@@ -1,6 +1,7 @@
 package com.springblogdemo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.springblogdemo.common.util.BeanParseUtils;
 import com.springblogdemo.mapper.BlogInfoMapper;
 import com.springblogdemo.pojo.dataobject.BlogInfo;
 import com.springblogdemo.pojo.response.BlogInfoResponse;
@@ -25,12 +26,17 @@ public class BlogServiceImpl implements BlogService {
 
         // 再将blogInfos转换为BlogListResponse
         List<BlogInfoResponse> blogInfoResponse = blogInfos.stream()
-                .map(blogInfo -> {
-            BlogInfoResponse response = new BlogInfoResponse();
-            BeanUtils.copyProperties(blogInfo, response);
-            return response;
-        })
+                .map(blogInfo -> BeanParseUtils.trans(blogInfo))
                 .collect(Collectors.toList());
         return blogInfoResponse;
+    }
+
+    @Override
+    public BlogInfoResponse getBlogDetail(Integer blogId) {
+        QueryWrapper<BlogInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, 0)
+                .eq(BlogInfo::getId, blogId);
+        BlogInfo blogInfo = blogInfoMapper.selectOne(queryWrapper);
+        return BeanParseUtils.trans(blogInfo);
     }
 }
