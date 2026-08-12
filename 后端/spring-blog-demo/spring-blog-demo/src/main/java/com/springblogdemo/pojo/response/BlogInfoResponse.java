@@ -2,9 +2,12 @@ package com.springblogdemo.pojo.response;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.springblogdemo.common.util.DateUtils;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class BlogInfoResponse {
@@ -13,5 +16,10 @@ public class BlogInfoResponse {
     private String title;
     private String content;
     private Integer user_id;
-    private LocalDate createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date createTime;
+
+//    public String getCreateTime() {
+//        return DateUtils.dateFormat(createTime);
+//    }
 }

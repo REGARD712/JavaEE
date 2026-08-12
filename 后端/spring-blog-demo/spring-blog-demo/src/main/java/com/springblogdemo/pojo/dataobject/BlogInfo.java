@@ -2,9 +2,11 @@ package com.springblogdemo.pojo.dataobject;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.springblogdemo.common.util.DateUtils;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Data
 public class BlogInfo {
@@ -14,6 +16,6 @@ public class BlogInfo {
     private String content;
     private Integer user_id;
     private Integer deleteFlag;
-    private LocalDate createTime;
+    private Date createTime;
     private LocalDate updateTime;
 }

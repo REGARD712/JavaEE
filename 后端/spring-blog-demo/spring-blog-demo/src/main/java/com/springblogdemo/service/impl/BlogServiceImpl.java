@@ -24,11 +24,13 @@ public class BlogServiceImpl implements BlogService {
         List<BlogInfo> blogInfos = blogInfoMapper.selectList(queryWrapper);
 
         // 再将blogInfos转换为BlogListResponse
-        List<BlogInfoResponse> blogInfoResponse = blogInfos.stream().map(blogInfo -> {
+        List<BlogInfoResponse> blogInfoResponse = blogInfos.stream()
+                .map(blogInfo -> {
             BlogInfoResponse response = new BlogInfoResponse();
             BeanUtils.copyProperties(blogInfo, response);
             return response;
-        }).collect(Collectors.toList());
+        })
+                .collect(Collectors.toList());
         return blogInfoResponse;
     }
 }
