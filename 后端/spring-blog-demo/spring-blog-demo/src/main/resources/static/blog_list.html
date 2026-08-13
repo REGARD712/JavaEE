@@ -54,24 +54,27 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/common.js"></script>
     <script>
-        $.ajax({
-            type: "get",
-            url: "/blog/getList",
-            success: function(result) {
-                if (result.code=="SUCCESS" && result.data!=null && result.data.length>0) {
-                    var finalHtml = "";
-                    for (var item of result.data) {
-                        finalHtml += '<div class="blog">';
-                        finalHtml += '<div class="title">'+item.title+'</div>';
-                        finalHtml += '<div class="date">'+item.createTime+'</div>';
-                        finalHtml += '<div class="desc">'+item.content+'';
-                        finalHtml += '<a class="detail" href="blog_detail.html?id='+item.id+'">查看全文&gt;&gt;</a>';
-                        finalHtml += '</div>';
+        getList();
+        function getList() {
+            $.ajax({
+                type: "get",
+                url: "/blog/getList",
+                success: function(result) {
+                    if (result.code=="SUCCESS" && result.data!=null && result.data.length>0) {
+                        var finalHtml = "";
+                        for (var item of result.data) {
+                            finalHtml += '<div class="blog">';
+                            finalHtml += '<div class="title">'+item.title+'</div>';
+                            finalHtml += '<div class="date">'+item.createTime+'</div>';
+                            finalHtml += '<div class="desc">'+item.content+'';
+                            finalHtml += '<a class="detail" href="blog_detail.html?id='+item.id+'">查看全文&gt;&gt;</a>';
+                            finalHtml += '</div>';
+                        }
+                        $(".container .right").html(finalHtml);
                     }
-                    $(".container .right").html(finalHtml);
                 }
-            }
-        });
+            });
+        }
     </script>
 </body>
 </html>
