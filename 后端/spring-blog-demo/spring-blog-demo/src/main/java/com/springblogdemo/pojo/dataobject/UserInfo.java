@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public class UserInfo {
     @TableId(type = IdType.AUTO)
     private Integer id;
-    private String username;
+    private String userName;
     private String password;
     private String github_url;
     private Integer deleteFlag;
