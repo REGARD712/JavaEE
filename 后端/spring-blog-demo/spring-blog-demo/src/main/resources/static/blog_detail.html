@@ -80,7 +80,7 @@
                         alert(result.errMsg);
                         return;
                     }
-                    if (result.code=="SUCCESS" && result.data!=null && result.data.length>0) {
+                    if (result.code=="SUCCESS" && result.data!=null) {
                         $(".content .title").text(result.data.title);
                         $(".content .date").text(result.data.createTime);
                         $(".content .detail").text(result.data.content);
