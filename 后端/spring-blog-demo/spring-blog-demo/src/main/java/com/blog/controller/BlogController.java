@@ -20,7 +20,6 @@ public class BlogController {
     @RequestMapping("/getList")
     public List<BlogInfoResponse> getList() {
         log.info("获取博客列表");
-
         List<BlogInfoResponse> blogInfos = blogService.getList();
         return blogInfos;
     }

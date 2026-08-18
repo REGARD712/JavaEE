@@ -1,7 +1,7 @@
 package com.blog.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.blog.common.util.BeanParseUtils;
+import com.blog.common.util.BeanTransUtils;
 import com.blog.mapper.BlogInfoMapper;
 import com.blog.pojo.dataobject.BlogInfo;
 import com.blog.pojo.response.BlogInfoResponse;
@@ -25,7 +25,7 @@ public class BlogServiceImpl implements BlogService {
 
         // 再将blogInfos转换为BlogListResponse
         List<BlogInfoResponse> blogInfoResponse = blogInfos.stream()
-                .map(blogInfo -> BeanParseUtils.trans(blogInfo))
+                .map(blogInfo -> BeanTransUtils.trans(blogInfo))
                 .collect(Collectors.toList());
         return blogInfoResponse;
     }
@@ -36,6 +36,14 @@ public class BlogServiceImpl implements BlogService {
         queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, 0)
                 .eq(BlogInfo::getId, blogId);
         BlogInfo blogInfo = blogInfoMapper.selectOne(queryWrapper);
-        return BeanParseUtils.trans(blogInfo);
+        return BeanTransUtils.trans(blogInfo);
+    }
+
+    @Override
+    public BlogInfo getBlogInfo(Integer blogId) {
+        QueryWrapper<BlogInfo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, 0)
+                .eq(BlogInfo::getId, blogId);
+        return blogInfoMapper.selectOne(queryWrapper);
     }
 }

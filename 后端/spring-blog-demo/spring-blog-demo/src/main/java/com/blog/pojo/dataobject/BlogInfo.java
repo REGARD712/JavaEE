@@ -13,7 +13,7 @@ public class BlogInfo {
     private Integer id;
     private String title;
     private String content;
-    private Integer user_id;
+    private Integer userId;
     private Integer deleteFlag;
     private Date createTime;
     private LocalDate updateTime;

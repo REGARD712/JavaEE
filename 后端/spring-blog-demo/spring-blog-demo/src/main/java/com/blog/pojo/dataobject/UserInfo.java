@@ -12,7 +12,7 @@ public class UserInfo {
     private Integer id;
     private String userName;
     private String password;
-    private String github_url;
+    private String githubUrl;
     private Integer deleteFlag;
     private LocalDate createTime;
     private LocalDate updateTime;
