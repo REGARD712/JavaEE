@@ -26,7 +26,7 @@ public class BlogController {
     }
 
     @RequestMapping("/getBlogDetail")
-    public BlogInfoResponse getBlogDetail (@NotNull Integer blogId) {
+    public BlogInfoResponse getBlogDetail (@NotNull(message = "blogId不能为null") Integer blogId) {
         log.info("获取博客详情，blogId: {}", blogId);
         // TODO: 这里可以增加参数校验，判断blogId是否为空或小于等于0
         return blogService.getBlogDetail(blogId);
