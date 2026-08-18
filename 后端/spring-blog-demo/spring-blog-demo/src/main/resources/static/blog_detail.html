@@ -62,6 +62,9 @@
     <script src="js/common.js"></script>
     <script>
         getBlogDetail();
+
+        var url = "/user/getAuthorInfo" + location.search;
+        getUserInfo(url);
         
         function getBlogDetail() {
             $.ajax({
