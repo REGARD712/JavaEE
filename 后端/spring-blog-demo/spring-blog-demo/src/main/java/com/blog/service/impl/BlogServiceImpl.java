@@ -60,7 +60,7 @@ public class BlogServiceImpl implements BlogService {
         try {
             Integer result = blogInfoMapper.insert(blogInfo);
             if (result == 1) {
-                return Result.success("添加博客成功");
+                return Result.success(true);
             }
             return Result.fail("添加博客失败，请重新尝试");
         } catch (Exception e) {
