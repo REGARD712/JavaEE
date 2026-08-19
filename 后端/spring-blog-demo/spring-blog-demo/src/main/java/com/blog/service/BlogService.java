@@ -1,7 +1,9 @@
 package com.blog.service;
 
 import com.blog.pojo.dataobject.BlogInfo;
+import com.blog.pojo.request.AddBlogRequest;
 import com.blog.pojo.response.BlogInfoResponse;
+import com.blog.pojo.response.Result;
 
 import java.util.List;
 
@@ -11,4 +13,6 @@ public interface BlogService {
     BlogInfoResponse getBlogDetail(Integer blogId);
 
     BlogInfo getBlogInfo(Integer blogId);
+
+    Result addBlog(AddBlogRequest addBlogRequest);
 }
