@@ -13,7 +13,7 @@ public class BlogInfoResponse {
     private Integer id;
     private String title;
     private String content;
-    private Integer user_id;
+    private Integer userId;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date createTime;
 

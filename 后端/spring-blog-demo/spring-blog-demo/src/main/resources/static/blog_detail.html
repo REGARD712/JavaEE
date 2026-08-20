@@ -45,8 +45,8 @@
                 <div class="detail" id="detail" style="background-color: transparent;">
                 </div>
                 <div class="operating">
-                    <button onclick="window.location.href='blog_update.html'">编辑</button>
-                    <button onclick="deleteBlog()">删除</button>
+                    <!-- <button onclick="window.location.href='blog_update.html'">编辑</button>
+                    <button onclick="deleteBlog()">删除</button> -->
                 </div>
             </div>
 
@@ -72,7 +72,7 @@
                 url: "/blog/getBlogDetail" + location.search,
                 success: function(result) {
                     if (result.code == "FAIL") {
-                        alert(result.errMsg);
+                        alert(result.errmsg);
                         return;
                     }
                     if (result.code=="SUCCESS" && result.data!=null) {
@@ -82,6 +82,18 @@
                         editormd.markdownToHTML("detail", {
                             markdown: result.data.content,
                         });
+
+                        //判断是否显示编辑/删除按钮
+                        let loginUserId = localStorage.getItem("loginUserId");
+                        if(result.data.userId==loginUserId){
+                            //当前作者是登录用户, 显示按钮
+                            let blogId = result.data.id;
+                            let finalHtml = '<button onclick="window.location.href=\'blog_update.html?blogId='+blogId+'\'">编辑</button>';
+                            finalHtml += '<button onclick="deleteBlog('+blogId+')">删除</button>';
+                            console.log(finalHtml);
+                            
+                            $(".content .operating").html(finalHtml);
+                        }
                     }
                 }
             });
@@ -91,7 +103,20 @@
         //getUserInfo(userUrl);
 
         function deleteBlog() {
-            alert("删除博客");
+            $.ajax({
+                type: "post",
+                url: "/blog/delete" + location.search,
+                success: function(result){
+                    if(result.code =="SUCCESS" && result.data==true){
+                        //删除成功
+                        alert("删除成功");
+                        location.href = "blog_list.html";
+                    }else{
+                        alert(result.errmsg);
+                        return;
+                    }
+                }
+            });
         }
     </script>
 </body>
