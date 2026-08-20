@@ -3,6 +3,7 @@ package com.blog.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.blog.common.exception.BlogException;
 import com.blog.common.util.BeanTransUtils;
+import com.blog.constant.Constants;
 import com.blog.mapper.BlogInfoMapper;
 import com.blog.pojo.dataobject.BlogInfo;
 import com.blog.pojo.request.AddBlogRequest;
@@ -27,7 +28,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public List<BlogInfoResponse> getList() {
         QueryWrapper<BlogInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, 0);
+        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, Constants.BLOG_NORMAL);
         List<BlogInfo> blogInfos = blogInfoMapper.selectList(queryWrapper);
 
         // 再将blogInfos转换为BlogListResponse
@@ -40,7 +41,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogInfoResponse getBlogDetail(Integer blogId) {
         QueryWrapper<BlogInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, 0)
+        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, Constants.BLOG_NORMAL)
                 .eq(BlogInfo::getId, blogId);
         BlogInfo blogInfo = blogInfoMapper.selectOne(queryWrapper);
         return BeanTransUtils.trans(blogInfo);
@@ -49,7 +50,7 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogInfo getBlogInfo(Integer blogId) {
         QueryWrapper<BlogInfo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, 0)
+        queryWrapper.lambda().eq(BlogInfo::getDeleteFlag, Constants.BLOG_NORMAL)
                 .eq(BlogInfo::getId, blogId);
         return blogInfoMapper.selectOne(queryWrapper);
     }
