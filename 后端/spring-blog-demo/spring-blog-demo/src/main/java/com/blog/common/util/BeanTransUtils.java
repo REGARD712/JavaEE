@@ -2,6 +2,7 @@ package com.blog.common.util;
 
 import com.blog.pojo.dataobject.BlogInfo;
 import com.blog.pojo.dataobject.UserInfo;
+import com.blog.pojo.request.UpdateBlogRequest;
 import com.blog.pojo.response.BlogInfoResponse;
 import com.blog.pojo.response.UserInfoResponse;
 import org.springframework.beans.BeanUtils;
@@ -25,5 +26,15 @@ public class BeanTransUtils {
         UserInfoResponse response = new UserInfoResponse();
         BeanUtils.copyProperties(userInfo, response);
         return response;
+    }
+
+    public static BlogInfo trans(UpdateBlogRequest updateBlogRequest) {
+        if (updateBlogRequest == null) {
+            // TODO: 可以抛出异常或者返回一个默认的BlogInfo对象
+            return null;
+        }
+        BlogInfo blogInfo = new BlogInfo();
+        BeanUtils.copyProperties(updateBlogRequest, blogInfo);
+        return blogInfo;
     }
 }

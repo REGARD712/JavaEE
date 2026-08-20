@@ -1,6 +1,7 @@
 package com.blog.controller;
 
 import com.blog.pojo.request.AddBlogRequest;
+import com.blog.pojo.request.UpdateBlogRequest;
 import com.blog.pojo.response.BlogInfoResponse;
 import com.blog.pojo.response.Result;
 import com.blog.service.BlogService;
@@ -39,5 +40,11 @@ public class BlogController {
     public Boolean add (@RequestBody @Validated AddBlogRequest addBlogRequest) {
         log.info("添加博客，userId: {}，title: {}", addBlogRequest.getUserId(), addBlogRequest.getTitle());
         return blogService.addBlog(addBlogRequest);
+    }
+
+    @RequestMapping("/update")
+    public Boolean update (@RequestBody @Validated UpdateBlogRequest updateBlogRequest) {
+        log.info("更新博客，updateBlogRequest: {}", updateBlogRequest);
+        return blogService.updateBlog(updateBlogRequest);
     }
 }

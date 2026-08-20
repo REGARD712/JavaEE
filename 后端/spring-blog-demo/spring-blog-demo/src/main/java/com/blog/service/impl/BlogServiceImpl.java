@@ -6,6 +6,7 @@ import com.blog.common.util.BeanTransUtils;
 import com.blog.mapper.BlogInfoMapper;
 import com.blog.pojo.dataobject.BlogInfo;
 import com.blog.pojo.request.AddBlogRequest;
+import com.blog.pojo.request.UpdateBlogRequest;
 import com.blog.pojo.response.BlogInfoResponse;
 import com.blog.pojo.response.Result;
 import com.blog.service.BlogService;
@@ -65,6 +66,18 @@ public class BlogServiceImpl implements BlogService {
             return false;
         } catch (Exception e) {
             log.error("添加博客失败，e：{}", e.getMessage());
+            throw new BlogException("内部错误，请联系管理员");
+        }
+    }
+
+    @Override
+    public Boolean updateBlog(UpdateBlogRequest updateBlogRequest) {
+        BlogInfo blogInfo = BeanTransUtils.trans(updateBlogRequest);
+        try {
+            Integer result = blogInfoMapper.updateById(blogInfo);
+            return result == 1;
+        } catch (Exception e) {
+            log.error("修改博客失败，e：{}", e.getMessage());
             throw new BlogException("内部错误，请联系管理员");
         }
     }
