@@ -36,7 +36,7 @@ public class BlogController {
     }
 
     @RequestMapping("/add")
-    public Result add (@RequestBody @Validated AddBlogRequest addBlogRequest) {
+    public Boolean add (@RequestBody @Validated AddBlogRequest addBlogRequest) {
         log.info("添加博客，userId: {}，title: {}", addBlogRequest.getUserId(), addBlogRequest.getTitle());
         return blogService.addBlog(addBlogRequest);
     }

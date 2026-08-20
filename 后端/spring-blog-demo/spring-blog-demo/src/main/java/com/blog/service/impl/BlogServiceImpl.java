@@ -54,15 +54,15 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Result addBlog(AddBlogRequest addBlogRequest) {
+    public Boolean addBlog(AddBlogRequest addBlogRequest) {
         BlogInfo blogInfo = new BlogInfo();
         BeanUtils.copyProperties(addBlogRequest, blogInfo);
         try {
             Integer result = blogInfoMapper.insert(blogInfo);
             if (result == 1) {
-                return Result.success(true);
+                return true;
             }
-            return Result.fail("添加博客失败，请重新尝试");
+            return false;
         } catch (Exception e) {
             log.error("添加博客失败，e：{}", e.getMessage());
             throw new BlogException("内部错误，请联系管理员");

@@ -14,5 +14,5 @@ public interface BlogService {
 
     BlogInfo getBlogInfo(Integer blogId);
 
-    Result addBlog(AddBlogRequest addBlogRequest);
+    Boolean addBlog(AddBlogRequest addBlogRequest);
 }
