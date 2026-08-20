@@ -3,7 +3,6 @@ package com.blog.controller;
 import com.blog.pojo.request.AddBlogRequest;
 import com.blog.pojo.request.UpdateBlogRequest;
 import com.blog.pojo.response.BlogInfoResponse;
-import com.blog.pojo.response.Result;
 import com.blog.service.BlogService;
 import jakarta.annotation.Resource;
 import jakarta.validation.constraints.NotNull;
@@ -46,5 +45,11 @@ public class BlogController {
     public Boolean update (@RequestBody @Validated UpdateBlogRequest updateBlogRequest) {
         log.info("更新博客，updateBlogRequest: {}", updateBlogRequest);
         return blogService.updateBlog(updateBlogRequest);
+    }
+
+    @RequestMapping("/delete")
+    public Boolean delete (@NotNull(message = "blogId不能为null") Integer blogId) {
+        log.info("删除博客，blogId: {}", blogId);
+        return blogService.deleteBlog(blogId);
     }
 }

@@ -82,4 +82,18 @@ public class BlogServiceImpl implements BlogService {
             throw new BlogException("内部错误，请联系管理员");
         }
     }
+
+    @Override
+    public Boolean deleteBlog(Integer blogId) {
+        BlogInfo blogInfo = new BlogInfo();
+        blogInfo.setId(blogId);
+        blogInfo.setDeleteFlag(Constants.BLOG_DELETED);
+        try {
+            Integer result = blogInfoMapper.updateById(blogInfo);
+            return result == 1;
+        } catch (Exception e) {
+            log.error("删除博客失败，e：{}", e.getMessage());
+            throw new BlogException("内部错误，请联系管理员");
+        }
+    }
 }
