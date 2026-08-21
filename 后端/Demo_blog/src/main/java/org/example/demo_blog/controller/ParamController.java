@@ -1,5 +1,6 @@
-package org.example.demo_blog;
+package org.example.demo_blog.controller;
 
+import org.example.demo_blog.pojo.Person;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,5 +21,15 @@ public class ParamController {
     @RequestMapping("/m1/int")
     public Object methodGetInt (int age) {
         return "接收到参数age: " + age;
+    }
+
+    @RequestMapping("/m2")
+    public Object method2 (String name, String password) {
+        return "接收到参数name: " + name + ", password: " + password;
+    }
+
+    @RequestMapping("/m3")
+    public Object method3 (Person person) {
+        return person.toString();
     }
 }
