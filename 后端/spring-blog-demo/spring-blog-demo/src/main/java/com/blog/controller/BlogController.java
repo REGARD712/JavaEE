@@ -21,6 +21,14 @@ public class BlogController {
     @Resource(name = "blogServiceImpl")
     private BlogService blogService;
 
+    /**
+     * @Title: getList
+     * @Author: JacksonLee
+     * @Date: 2026-08-21
+     * @Params: []
+     * @Return: List<BlogInfoResponse>
+     * @Description: 获取博客列表
+     */
     @RequestMapping("/getList")
     public List<BlogInfoResponse> getList() {
         log.info("获取博客列表");
@@ -28,6 +36,14 @@ public class BlogController {
         return blogInfos;
     }
 
+    /**
+     * @Title: getBlogDetail
+     * @Author: JacksonLee
+     * @Date: 2026-08-21
+     * @Params: [blogId]
+     * @Return: BlogInfoResponse
+     * @Description: 获取博客详情
+     */
     @RequestMapping("/getBlogDetail")
     public BlogInfoResponse getBlogDetail (@NotNull(message = "blogId不能为null") Integer blogId) {
         log.info("获取博客详情，blogId: {}", blogId);
@@ -35,18 +51,42 @@ public class BlogController {
         return blogService.getBlogDetail(blogId);
     }
 
+    /**
+     * @Title: add
+     * @Author: JacksonLee
+     * @Date: 2026-08-21
+     * @Params: [addBlogRequest]
+     * @Return: Boolean
+     * @Description: 添加博客
+     */
     @RequestMapping("/add")
     public Boolean add (@RequestBody @Validated AddBlogRequest addBlogRequest) {
         log.info("添加博客，userId: {}，title: {}", addBlogRequest.getUserId(), addBlogRequest.getTitle());
         return blogService.addBlog(addBlogRequest);
     }
 
+    /**
+     * @Title: update
+     * @Author: JacksonLee
+     * @Date: 2026-08-21
+     * @Params: [updateBlogRequest]
+     * @Return: Boolean
+     * @Description: 更新博客
+     */
     @RequestMapping("/update")
     public Boolean update (@RequestBody @Validated UpdateBlogRequest updateBlogRequest) {
         log.info("更新博客，updateBlogRequest: {}", updateBlogRequest);
         return blogService.updateBlog(updateBlogRequest);
     }
 
+    /**
+     * @Title: delete
+     * @Author: JacksonLee
+     * @Date: 2026-08-21
+     * @Params: [blogId]
+     * @Return: Boolean
+     * @Description: 删除博客
+     */
     @RequestMapping("/delete")
     public Boolean delete (@NotNull(message = "blogId不能为null") Integer blogId) {
         log.info("删除博客，blogId: {}", blogId);
