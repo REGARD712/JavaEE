@@ -2,6 +2,7 @@ package org.example.demo_blog.controller;
 
 import org.example.demo_blog.pojo.Person;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,5 +32,10 @@ public class ParamController {
     @RequestMapping("/m3")
     public Object method3 (Person person) {
         return person.toString();
+    }
+
+    @RequestMapping("/m4")
+    public Object method4 (@RequestParam(value = "time", required = false) String createTime) {
+        return "接收到参数createTime: " + createTime;
     }
 }
