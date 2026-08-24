@@ -15,13 +15,13 @@ import org.springframework.web.method.annotation.HandlerMethodValidationExceptio
 public class ExceptionAdvice {
     @ExceptionHandler
     public Result exceptionHandler (Exception exception) {
-        log.error("发生异常，e：{}", exception);
+        log.error("发生异常，e：{}", exception.getMessage());
         return Result.fail(exception.getMessage());
     }
 
     @ExceptionHandler
     public Result exceptionHandler (BlogException exception) {
-        log.error("发生异常，e：{}", exception);
+        log.error("发生异常，e：{}", exception.getErrmsg());
         return Result.fail(exception.getErrmsg());
     }
 
