@@ -5,6 +5,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @ClassName: ParamController
  * @Author: JacksonLee
@@ -37,5 +40,15 @@ public class ParamController {
     @RequestMapping("/m4")
     public Object method4 (@RequestParam(value = "time", required = false) String createTime) {
         return "接收到参数createTime: " + createTime;
+    }
+
+    @RequestMapping("/m5")
+    public Object method5 (String[] arrayParam) {
+        return Arrays.toString(arrayParam);
+    }
+
+    @RequestMapping("/m6")
+    public Object method6 (@RequestParam List<String> listParam) {
+        return "size: " + listParam.size() + ", listParam: " + listParam;
     }
 }
