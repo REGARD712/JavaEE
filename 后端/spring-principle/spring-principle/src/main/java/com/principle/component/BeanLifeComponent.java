@@ -22,7 +22,7 @@ public class BeanLifeComponent implements BeanNameAware {
      * @Return: null
      * @Description: 1.实例化Bean，为其分配内存空间
      */
-    private UserComponent userComponent;
+    private DogComponent dogComponent;
 
     public BeanLifeComponent () {
         System.out.println("执行构造函数");
@@ -37,9 +37,9 @@ public class BeanLifeComponent implements BeanNameAware {
      * @Description: 2.属性赋值，Bean的注入和装配
      */
     @Autowired
-    public void setUserComponent (UserComponent userComponent) {
-        System.out.println("设置属性 userComponent");
-        this.userComponent = userComponent;
+    public void setUserComponent (DogComponent dogComponent) {
+        System.out.println("设置属性 dogComponent");
+        this.dogComponent = dogComponent;
     }
 
     /**
