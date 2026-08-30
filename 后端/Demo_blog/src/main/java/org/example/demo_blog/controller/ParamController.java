@@ -1,10 +1,11 @@
 package org.example.demo_blog.controller;
 
 import org.example.demo_blog.pojo.Person;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -50,5 +51,24 @@ public class ParamController {
     @RequestMapping("/m6")
     public Object method6 (@RequestParam List<String> listParam) {
         return "size: " + listParam.size() + ", listParam: " + listParam;
+    }
+
+    @RequestMapping("/m7")
+    public Object method7 (Person person) {
+        return person.toString();
+    }
+
+    @RequestMapping("/m8/{id}/{name}")
+    public String method8 (@PathVariable Integer id, @PathVariable("name") String userName) {
+        return "解析参数：id 为" + id + ", name 为" + userName;
+    }
+
+    @RequestMapping("/m9")
+    public String getfile (@RequestPart("file")MultipartFile file) throws IOException {
+        // 获取文件名称
+        String fileName = file.getOriginalFilename();
+        // 文件上传到指定路径
+        file.transferTo(new File("C:/temp/" + file.getOriginalFilename()));
+        return "接收到的文件名称为：" + fileName;
     }
 }
