@@ -1,5 +1,8 @@
 package org.example.demo_blog.controller;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.example.demo_blog.pojo.Person;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -70,5 +73,24 @@ public class ParamController {
         // 文件上传到指定路径
         file.transferTo(new File("C:/temp/" + file.getOriginalFilename()));
         return "接收到的文件名称为：" + fileName;
+    }
+
+    @RequestMapping("/m10")
+    public String method10 (HttpServletRequest request, HttpServletResponse response) {
+        // 获取所有Cookie信息
+        Cookie[] cookies = request.getCookies();
+        // 打印cookie信息
+        StringBuilder builder = new StringBuilder();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                builder.append(cookie.getName() + ": " + cookie.getValue());
+            }
+        }
+        return "Cookie信息：" + builder;
+    }
+
+    @RequestMapping("/getCookie")
+    public String cookie (@CookieValue("cookieValue") String value) {
+        return "cookieValue: " + value;
     }
 }
