@@ -3,6 +3,7 @@ package org.example.demo_blog.controller;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.example.demo_blog.pojo.Person;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -90,7 +91,28 @@ public class ParamController {
     }
 
     @RequestMapping("/getCookie")
-    public String cookie (@CookieValue("cookieValue") String value) {
-        return "cookieValue: " + value;
+    public String cookie (@CookieValue("cookieKey") String cookieValue) {
+        return "cookieKey: " + cookieValue;
+    }
+
+    @RequestMapping("/setSess")
+    public String setSess (HttpServletRequest request) {
+        // 获取Session对象
+        HttpSession session = request.getSession();
+        if (session != null) {
+            session.setAttribute("username", "java");
+        }
+        return "Session存储成功";
+    }
+
+    @RequestMapping("/getSess")
+    public String getSess (HttpServletRequest request) {
+        // 如果Session不存在，防止自动创建
+        HttpSession session = request.getSession(false);
+        String username = null;
+        if (session != null && session.getAttribute("username") != null) {
+            username = (String) session.getAttribute("username");
+        }
+        return "username: " + username;
     }
 }
