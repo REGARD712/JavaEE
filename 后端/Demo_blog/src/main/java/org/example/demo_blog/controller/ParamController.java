@@ -115,4 +115,26 @@ public class ParamController {
         }
         return "username: " + username;
     }
+
+    @RequestMapping("/getSess2")
+    public String getSess2 (@SessionAttribute(value = "username", required = false) String username) {
+        return "username: " + username;
+    }
+
+    @RequestMapping("/getSess3")
+    public String getSess3 (HttpSession session) {
+        String username = (String) session.getAttribute("username");
+        return "username: " + username;
+    }
+
+    @RequestMapping("/getHeader")
+    public String getHeader (HttpServletRequest request, HttpServletResponse response) {
+        String userAgent = request.getHeader("User-Agent");
+        return "User-Agent: " + userAgent;
+    }
+
+    @RequestMapping("/getHeader2")
+    public String getHeader2 (@RequestHeader("User-Agent") String userAgent) {
+        return "User-Agent: " + userAgent;
+    }
 }
