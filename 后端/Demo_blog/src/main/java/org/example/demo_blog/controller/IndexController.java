@@ -1,5 +1,6 @@
 package org.example.demo_blog.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,5 +36,19 @@ public class IndexController {
         map.put("name", "Spring");
         map.put("version", "6.0");
         return map;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/setStatus")
+    public String setStatus(HttpServletResponse response) {
+        response.setStatus(401);
+        return "设置状态码成功";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/returnJson2",produces = "application/json;charset=utf-8")
+//    @RequestMapping("/returnJson2")
+    public String returnJson2() {
+        return "{\"success\":true}";
     }
 }
