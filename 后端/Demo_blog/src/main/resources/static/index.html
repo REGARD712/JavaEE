@@ -14,7 +14,13 @@
 
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script>
-
+        $.ajax({
+            type: 'get',
+            url: '/user/getLoginUser',
+            success: function (response) {
+                $('#loginUser').text(response);
+            }
+        });
     </script>
 </body>
 
